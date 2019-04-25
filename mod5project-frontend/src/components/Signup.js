@@ -1,32 +1,34 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {getCurrentUser} from '../redux/actions.js'
 
 class Signup extends React.Component {
   state = {
     name: '',
     username: '',
+    email: '',
     password: '',
     is_band: false
   }
 
   changeHandler = (e) => {
-    this.setState({[e.target.name]: e.target.value}, () => console.log(this.state))
+    this.setState({[e.target.name]: e.target.value})
   }
 
   accountTypeHandler = (e) => {
-    this.setState({[e.target.name]: !this.state.is_band}, () => console.log(this.state))
+    this.setState({[e.target.name]: !this.state.is_band})
   }
 
   submitHandler = (e) => {
     e.preventDefault()
     if (e.target.password.value === e.target.confirmPassword.value){
-      console.log("passwords match")
-      this.props.submitHandler(this.state)
+
+      this.props.getCurrentUser(this.state)
     }
     else {
-      console.log("passwords do not match")
+
       alert("passwords do not match")
     }
-    console.log(this.state)
   }
 
   render(){
@@ -39,6 +41,9 @@ class Signup extends React.Component {
           <br />
           <label>Username:</label>
           <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.changeHandler}/>
+          <br />
+          <label>Email:</label>
+          <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.changeHandler}/>
           <br />
           <label>Password:</label>
           <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.changeHandler}/>
@@ -59,4 +64,8 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup
+const mapDispatchToProps = (dispatch) => {
+  return ({getCurrentUser: (user) => dispatch(getCurrentUser(user))})
+}
+
+export default connect(null, mapDispatchToProps)(Signup)

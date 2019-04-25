@@ -5,18 +5,20 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    byebug
+
     if @user.valid?
-      render json: { user: UserSerializer.new(@user) }, status: :created
+
+      @token = JWT.encode({user_id: @user.id}, 'secret')
+      render json: { user: ActiveModel::Serializer::UserSerializer.new(@user), jwt: @token }, status: :created
     else
-      render json: { error: 'failed to create user' }, status: :not_acceptable
+      render json: { error: @user.errors }, status: :not_acceptable
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :username, :email, :password, :gender, :age, :location, :favorite_genre, :favorite_band, :members, :bio, :valid_music_link)
+    params.permit(:name, :username, :email, :password, :gender, :age, :location, :favorite_genre, :favorite_band, :members, :bio, :valid_music_link, :is_band)
   end
 
 end
