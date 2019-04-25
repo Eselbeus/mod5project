@@ -3,6 +3,11 @@ class Api::V1::UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    @user = User.find(update_params[:id])
+    render json: @user
+  end
+
   def create
     @user = User.create(user_params)
 
