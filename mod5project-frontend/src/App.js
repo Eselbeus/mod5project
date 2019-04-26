@@ -27,7 +27,6 @@ class App extends React.Component {
           .then(resp => resp.json())
           .then(res => {
             console.log(res, "what is this!?")
-            localStorage.setItem('token', res.jwt)
             this.props.loadingUser(res)})
 
       // : this.props.history.push("/signup")
@@ -47,6 +46,7 @@ class App extends React.Component {
         <Login />
         <Signup />
         <Logout />
+
       </div>
     );
   }

@@ -1,6 +1,10 @@
 export const loadUser = (user) => ({type: "LOAD_USER", payload: user})
-// const getUser = (user) => ({type: "GET_USER", payload: user})
 
+// const getUser = (user) => ({type: "GET_USER", payload: user})
+export const logoutUser = ({}) => {
+  localStorage.clear()
+  return ({type: "LOGOUT_USER", payload: {}})
+}
 
 export const getCurrentUser = (user) => {
   return (dispatch) => {
