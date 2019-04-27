@@ -1,4 +1,5 @@
 export const loadUser = (user) => ({type: "LOAD_USER", payload: user})
+export const fillBands = (bands) => ({type: "GET_BANDS", payload: bands})
 
 // const getUser = (user) => ({type: "GET_USER", payload: user})
 export const logoutUser = ({}) => {
@@ -32,7 +33,6 @@ export const getCurrentUser = (user) => {
 }
 
 export const getUser = (user) => {
-  console.log(user, "b4 fetch")
   return (dispatch) => {
     return fetch(`http://localhost:3000/api/v1/login/`, {
       method: "POST",
@@ -51,6 +51,13 @@ export const getUser = (user) => {
       localStorage.setItem('token', res.jwt)
       dispatch(loadUser(res))})
   }
+}
 
-
+export const getBands = () => {
+  console.log("b4 band fetch")
+  return (dispatch) => {
+    return fetch(`http://localhost:3000/api/v1/users/`)
+    .then(res => res.json())
+    .then(bands => dispatch(fillBands(bands)))
+  }
 }

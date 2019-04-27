@@ -1,5 +1,6 @@
 const initialState = {
-  currentUser: {}
+  currentUser: {},
+  allUsers: []
 }
 
 export default function reducer(state = initialState, action){
@@ -10,6 +11,8 @@ export default function reducer(state = initialState, action){
       return {...state, currentUser: {}}
     case 'LOAD_USER':
       return {...state, currentUser: action.payload}
+    case 'GET_BANDS':
+      return {...state, allUsers: [action.payload]}
     default:
       return state;
   }
