@@ -22,11 +22,14 @@ class MusingForm extends React.Component {
         "Accept": 'application/json',
         Authorization: 'Bearer'
       },
-      body: {
+      body: JSON.stringify({
         body: musingBody,
-      }
+        user_id: userId,
+        likes: 0
+      })
     }
-    fetch(`http://localhost:3000/api/v1/users/${userId}/musings`)
+    console.log(config)
+    fetch(`http://localhost:3000/api/v1/users/${userId}/musings`, config)
   }
 
   render(){

@@ -1,3 +1,3 @@
 class MusingSerializer < ActiveModel::Serializer
-  attributes :id, :body
+  attributes :user_id, :body, :likes
 end
