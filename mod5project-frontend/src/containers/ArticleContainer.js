@@ -11,6 +11,7 @@ class ArticleContainer extends React.Component {
   }
 
   componentDidMount(){
+    this.props.getBands()
     fetch(`http://localhost:3000/api/v1/articles`)
     .then(res => res.json())
     .then(res => {
@@ -27,17 +28,17 @@ class ArticleContainer extends React.Component {
     })
     : console.log(users, "USERS")
 
-    console.log(this.props.getBands[0], "props in render")
+    console.log(this.props, "props in render")
     let allArticles;
-
-    if (!!this.state.articles){
+    let author;
+    if (!!this.state.articles && this.props.allUsers[0]){
       allArticles = this.state.articles.map(article => {
-        // let author = this.props.allUsers[0].find(user => {
-        //   return user.id === article.user_id})
-        // console.log(author, "author", article.user_id)
+        author = this.props.allUsers[0].find(user => {
+          return user.id === article.user_id})
+        console.log(author, "author", article.user_id)
         return (
           <div>
-            {article.headline}
+            <h3>{article.headline} by {author.name}</h3>
           </div>
         )
       })

@@ -56,7 +56,6 @@ export const getUser = (user) => {
 }
 
 export const getMusings = (musings) => {
-  console.log("b4 musing get fetch")
   return (dispatch) => {
     return fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/musings`)
     .then(res => res.json())
@@ -67,7 +66,6 @@ export const getMusings = (musings) => {
 }
 
 export const postMusing = (musings) => {
-  console.log("b4 musing post fetch")
   return (dispatch) => {
     return fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/musings`)
     .then(res => res.json())
@@ -78,7 +76,6 @@ export const postMusing = (musings) => {
 }
 
 export const getBands = () => {
-  console.log("b4 band fetch")
   return (dispatch) => {
     return fetch(`http://localhost:3000/api/v1/users/`)
     .then(res => res.json())
