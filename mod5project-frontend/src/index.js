@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter as Router, Route} from "react-router-dom"
+
+import Nav from './components/Nav'
 
 import thunk from 'redux-thunk'
 import reducer from './redux/reducer.js'
 import './index.css';
 import App from './App';
+import BandsContainer from './containers/BandsContainer';
 import {Provider} from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 
@@ -14,9 +17,12 @@ const store = createStore(reducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Router>
+      <Nav />
+      
+      <Route exact path="/" component={App} />
+      <Route exact path="/bands" component={BandsContainer} />
+    </Router>
   </Provider>
   , document.getElementById('root'));
 

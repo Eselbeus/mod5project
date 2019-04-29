@@ -17,10 +17,38 @@ class CurrentUserProfile extends React.Component {
     .then(res => res.json())
     .then(res => {
       if (this.state.musings.length !== res.length){
-        this.setState({musings: res}, () => console.log(res))
+        this.setState({musings: res}, () => console.log(res, "after state update"))
       }
     })
     }
+  }
+
+  submitHandler = (e) => {
+    e.preventDefault()
+    console.log("inside submitHandler")
+    let musingBody = e.target.body.value
+    let userId = this.props.currentUser.user.id
+    console.log(musingBody, userId)
+    let config = {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        "Accept": 'application/json',
+        Authorization: 'Bearer'
+      },
+      body: JSON.stringify({
+        body: musingBody,
+        user_id: userId,
+        likes: 0
+      })
+    }
+    console.log(config, "config obj for post")
+    fetch(`http://localhost:3000/api/v1/users/${userId}/musings`, config)
+    .then(res => res.json())
+    .then(res => {
+
+        this.setState({musings: [...this.state.musings, res]}, () => console.log(res, "after fetch2"))
+    })
   }
 
   renderMusingForm = () => {
@@ -28,10 +56,13 @@ class CurrentUserProfile extends React.Component {
   }
 
   render(){
-    console.log(this.state)
-    let allMusings = this.state.musings.map(musing => {
+    let allMusings
+    if (!!this.state.musings) {
+    let allMusings2 = this.state.musings.map(musing => {
       return <Musing musing={musing}/>
     })
+    allMusings = allMusings2.reverse()
+  }
     return (
       <div>
           {!!this.props.currentUser.user ?
@@ -41,11 +72,10 @@ class CurrentUserProfile extends React.Component {
             <div className='musings'>
           <h2>Musings</h2>
           <button onClick={this.renderMusingForm}>Post new musing</button>
-          {this.state.musingForm ? <MusingForm /> : ""}
-          <div>{allMusings.reverse()}</div>
+          {this.state.musingForm ? <MusingForm submitHandler={this.submitHandler}/> : ""}
+          <div>{allMusings}</div>
             </div>
           </div> : ''}
-
       </div>
     )
   }

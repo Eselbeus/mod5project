@@ -2,6 +2,7 @@ import React from 'react';
 import Signup from './components/Signup.js'
 import Login from './components/Login.js'
 import Logout from './components/Logout.js'
+import Nav from './components/Nav.js'
 import Profile from './components/Profile.js'
 import BandsContainer from './containers/BandsContainer.js'
 import CurrentUserProfile from './components/CurrentUserProfile.js'
@@ -32,7 +33,7 @@ class App extends React.Component {
         })
           .then(resp => resp.json())
           .then(res => {
-            console.log(res, "what is this!?")
+
             this.props.loadingUser(res)})
 
       // : this.props.history.push("/signup")
@@ -58,6 +59,7 @@ class App extends React.Component {
     console.log(localStorage.getItem('token'))
     return (
       <div className="App">
+
         <h1>{this.props.currentUser.user != undefined ? `Hello ${this.props.currentUser.user.name}` : "Hello Muser!"}</h1>
         {!token ?
         <React.Fragment>
@@ -65,7 +67,6 @@ class App extends React.Component {
           {!this.state.login ? <button onClick={this.loginButton}>Login for returning users</button> : <Login />}
         </React.Fragment> :
         <Logout />}
-        <BandsContainer />
         <CurrentUserProfile />
       </div>
     );
