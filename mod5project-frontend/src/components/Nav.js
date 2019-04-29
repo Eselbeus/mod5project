@@ -3,22 +3,34 @@ import { BrowserRouter as Link, NavLink, Router } from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getUser} from '../redux/actions.js'
 import {logoutUser} from '../redux/actions.js'
+import '../App.css';
 
-const Nav = (props) => {
+class Nav extends React.Component {
 
-  return (
-    <nav>
-      <NavLink to='/'>Home</NavLink>
-      <NavLink to='/bands'>Bands</NavLink>
-      <NavLink onClick={props.logoutUser} to='/'>Logout</NavLink>
-    </nav>
+  render(){
+    let isBand;
+    if (this.props.currentUser.user){
+      isBand = this.props.currentUser.user.is_band
+    }
 
-  )
+    return (
+      <nav>
+        <NavLink to='/'>Home</NavLink>
+        {isBand === false ?
+        <NavLink to='/bands'>Bands</NavLink> : ""}
+        <NavLink onClick={this.props.logoutUser} to='/'>Logout</NavLink>
+      </nav>
 
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return state;
 }
 
 const mapDispatchToProps = (dispatch) => {
   return ({logoutUser: (user) => dispatch(logoutUser(user))})
 }
 
-export default connect(null, mapDispatchToProps)(Nav);
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

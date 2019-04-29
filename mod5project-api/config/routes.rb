@@ -5,11 +5,17 @@ Rails.application.routes.draw do
       resources :users do
         resources :musings
       end
+      resources :users do
+        resources :articles
+      end
+      resources :articles
+
       post '/login', to: 'auth#create'
       post '/login', to: 'auth#show'
       get '/login', to: 'auth#show'
       get '/profile', to: 'users#profile'
       get '/users/:id/musings', to: 'musings#index'
+
     end
   end
 

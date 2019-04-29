@@ -55,5 +55,13 @@
 }
 
 .musings {
-  background-color: #FFDDDD;
+  background-color: #FFBBBB;
+}
+
+.articles {
+  background-color: #FF9999;
+}
+
+nav {
+  background-color: #DD0000;
 }

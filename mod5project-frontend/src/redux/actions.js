@@ -1,5 +1,7 @@
 export const loadUser = (user) => ({type: "LOAD_USER", payload: user})
 export const fillBands = (bands) => ({type: "GET_BANDS", payload: bands})
+export const fillMusings = (musings) => ({type: "GET_MUSINGS", payload: musings})
+export const newMusing = (musing) => ({type: "POST_MUSING", payload: musing})
 
 // const getUser = (user) => ({type: "GET_USER", payload: user})
 export const logoutUser = ({}) => {
@@ -50,6 +52,28 @@ export const getUser = (user) => {
       console.log(res)
       localStorage.setItem('token', res.jwt)
       dispatch(loadUser(res))})
+  }
+}
+
+export const getMusings = (musings) => {
+  console.log("b4 musing get fetch")
+  return (dispatch) => {
+    return fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/musings`)
+    .then(res => res.json())
+    .then(res => {
+        dispatch(fillMusings(res))
+    })
+  }
+}
+
+export const postMusing = (musings) => {
+  console.log("b4 musing post fetch")
+  return (dispatch) => {
+    return fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/musings`)
+    .then(res => res.json())
+    .then(res => {
+        dispatch(newMusing(res))
+    })
   }
 }
 

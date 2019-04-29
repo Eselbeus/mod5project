@@ -3,6 +3,7 @@ import Profile from './Profile'
 
 class Band extends React.Component {
   render(){
+    console.log(this.props, "the band props")
     return (
       <div>
         <h3>{this.props.band.name}</h3>

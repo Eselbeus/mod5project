@@ -6,6 +6,7 @@ import Nav from './components/Nav.js'
 import Profile from './components/Profile.js'
 import BandsContainer from './containers/BandsContainer.js'
 import CurrentUserProfile from './components/CurrentUserProfile.js'
+import ArticleContainer from './containers/ArticleContainer.js'
 import './App.css';
 import {connect} from 'react-redux'
 import {getCurrentUser} from './redux/actions.js'
@@ -68,6 +69,7 @@ class App extends React.Component {
         </React.Fragment> :
         <Logout />}
         <CurrentUserProfile />
+        <ArticleContainer />
       </div>
     );
   }

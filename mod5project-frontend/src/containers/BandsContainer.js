@@ -20,7 +20,7 @@ class BandsContainer extends React.Component {
     : console.log()
 
     !!users ? bandComponents = bands.map(band => {
-      return <Band band={band}/>
+      return <Band band={band} />
     }) : console.log()
 
 
