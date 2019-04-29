@@ -1,6 +1,12 @@
 class Api::V1::MusingsController < ApplicationController
   def index
     @musings = Musing.all
+    render json: @musings
+  end
+
+  def show
+    @musing = Musing.find(params[:id])
+    render json: @musing
   end
 
   def create

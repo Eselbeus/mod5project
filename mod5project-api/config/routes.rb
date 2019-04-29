@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       post '/login', to: 'auth#show'
       get '/login', to: 'auth#show'
       get '/profile', to: 'users#profile'
+      get '/users/:id/musings', to: 'musings#index'
     end
   end
+
 end

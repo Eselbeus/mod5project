@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 class Profile extends React.Component {
   render(){
-    console.log(this.props, "profile props")
+    // console.log(this.props, "profile props")
     return (
       <div>
         <div>
