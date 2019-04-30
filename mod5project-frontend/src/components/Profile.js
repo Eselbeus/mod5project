@@ -37,7 +37,10 @@ class Profile extends React.Component {
       <div>
         <div>
         <h1>{this.props.band.name}</h1>
-        <p>{this.props.band.bio}</p>
+        <h4>Band/Musician</h4>
+        <button>Follow {this.props.band.name}</button>
+        <button>Find fans of {this.props.band.name}</button>
+        <p>{this.props.band.bio}Bio</p>
         <div>{musings}</div>
         </div>
       </div>

@@ -10,8 +10,13 @@ class BandsContainer extends React.Component {
     singleBand: {}
   }
 
-  displayJustOneBand = () => {
+  displayJustOneBand = (id) => {
     this.setState({displayBand: !this.state.displayBand})
+    fetch(`http://localhost:3000/api/v1/users/${id}`)
+    .then(res => res.json())
+    .then(res => {
+      this.setState({singleBand: res}, () => console.log("Does this work?!", this.state))
+    })
   }
 
   componentDidMount(){
@@ -29,13 +34,13 @@ class BandsContainer extends React.Component {
     : console.log()
 
     !!users ? bandComponents = bands.map(band => {
-      return <Band band={band} displayJustOneBand={this.displayJustOneBand}/>
+      return <Band band={band} displayJustOneBand={this.displayJustOneBand} displayBand={this.state.displayBand}/>
     }) : console.log()
 
 
     return (
       <div>
-        {this.state.displayBand ? bandComponents : ''}
+        {this.state.displayBand ? bandComponents : <Band band={this.state.singleBand} displayJustOneBand={this.displayJustOneBand} displayBand={this.state.displayBand} />}
         <ArticleContainer />
       </div>
     )

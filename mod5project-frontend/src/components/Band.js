@@ -3,13 +3,14 @@ import Profile from './Profile'
 
 
 class Band extends React.Component {
-  state = {
-    bandProfile: false
-  }
+  // state = {
+  //   bandProfile: false
+  // }
 
   profileLoad = () => {
-    this.setState({bandProfile: !this.state.bandProfile})
-    this.props.displayJustOneBand()
+
+    this.props.displayJustOneBand(this.props.band.id)
+    // this.setState({bandProfile: true}, () => console.log(this.state, 'profilestate'))
   }
 
   render(){
@@ -17,7 +18,7 @@ class Band extends React.Component {
     return (
       <div>
         <div>
-          {this.state.bandProfile ? <Profile band={this.props.band}/> : <h3 className="bandname" onClick={this.profileLoad}>{this.props.band.name}</h3>}
+          {!this.props.displayBand ? <Profile band={this.props.band}/> : <h3 className="bandname" onClick={this.profileLoad}>{this.props.band.name}</h3>}
         </div>
 
       </div>
