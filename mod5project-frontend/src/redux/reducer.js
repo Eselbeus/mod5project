@@ -7,7 +7,7 @@ const initialState = {
 export default function reducer(state = initialState, action){
   switch (action.type) {
     case 'GET_USER':
-      return action.payload
+      return {...state, currentUser: action.payload}
     case 'LOGOUT_USER':
       return {...state, currentUser: {}, musings: []}
     case 'LOAD_USER':
@@ -17,7 +17,7 @@ export default function reducer(state = initialState, action){
     case 'GET_MUSINGS':
       return {...state, musings: [action.payload]}
     case 'POST_MUSING':
-      return {...state, musings: [...this.state.musings, action.payload]}
+      return {...state, musings: [[...state.musings[0], action.payload]]}
     default:
       return state;
   }

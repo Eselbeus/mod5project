@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resources :articles
       resources :musings
 
-      post '/login', to: 'auth#create'
+      post '/signup', to: 'auth#create'
       post '/login', to: 'auth#show'
       get '/login', to: 'auth#show'
       get '/profile', to: 'users#profile'

@@ -62,6 +62,12 @@
   background-color: #FF9999;
 }
 
+.article {
+  border-style: solid;
+  border-color: #FFFFFF;
+  margin: 2px
+}
+
 nav {
   background-color: #DD0000;
 }

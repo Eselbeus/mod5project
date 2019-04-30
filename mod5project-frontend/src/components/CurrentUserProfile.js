@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import MusingForm from './MusingForm'
-import ArticleForm from './ArticleForm'
 import Musing from './Musing'
 import '../App.css';
 import {getMusings} from '../redux/actions.js'
@@ -11,26 +10,42 @@ class CurrentUserProfile extends React.Component {
   state = {
     musingForm: false,
     articleForm: false,
-    articles: [],
     musings: []
   }
+//getting rid of the musings in this state
 
+  componentDidMount(){
+
+// this.props.getMusings(this.props.currentUser.user.id)
+  //   if (this.props.currentUser.user !== {}){
+  //     debugger
+  //   this.props.getMusings(this.props.currentUser.user.id)
+  // }
+  //   if (this.props.currentUser.user !== undefined){
+  //     debugger
+  //   this.props.getMusings()
+  //   }
+  }
 
   componentDidUpdate(){
-    if (this.props.currentUser.user !== undefined){
+    // this.props.getMusings()
 
-    fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/musings`)
-    .then(res => res.json())
-    .then(res => {
-      if (this.state.musings.length !== res.length){
-        this.setState({musings: res}, () => console.log(res, "after state update"))
-      }
-    })
+    if (this.props.currentUser.user !== undefined && this.props.musings.length === 0){
+      this.props.getMusings(this.props.currentUser.user.id)
+    // fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/musings`)
+    // .then(res => res.json())
+    // .then(res => {
+    //   if (this.state.musings.length !== res.length){
+    //     this.setState({musings: res}, () => console.log(res, "after state update"))
+    //   }
+    // })
     }
   }
+//moving this get fetch to actions getMusings
 
   submitHandler = (e) => {
     e.preventDefault()
+
     let musingBody = e.target.body.value
     let userId = this.props.currentUser.user.id
     console.log(musingBody, userId)
@@ -47,43 +62,17 @@ class CurrentUserProfile extends React.Component {
         likes: 0
       })
     }
-    console.log(config, "config obj for post")
-    fetch(`http://localhost:3000/api/v1/users/${userId}/musings`, config)
-    .then(res => res.json())
-    .then(res => {
-
-        this.setState({musings: [...this.state.musings, res]}, () => console.log(res, "after fetch2"))
-    })
+    console.log(config, "config prior to action")
+    this.props.postMusing(this.props.currentUser.user.id, config)
+    // console.log(config, "config obj for post")
+    // fetch(`http://localhost:3000/api/v1/users/${userId}/musings`, config)
+    // .then(res => res.json())
+    // .then(res => {
+    //
+    //     this.setState({musings: [...this.state.musings, res]}, () => console.log(res, "after fetch2"))
+    // })
   }
-
-  // submitArtHandler = (e) => {
-  //   e.preventDefault()
-  //   console.log("inside submitHandler")
-  //   let articleBody = e.target.body.value
-  //   let articleHeadline = e.target.headline.value
-  //   let userId = this.props.currentUser.user.id
-  //   console.log(articleBody, userId)
-  //   let config = {
-  //     method: "POST",
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       "Accept": 'application/json',
-  //       Authorization: 'Bearer'
-  //     },
-  //     body: JSON.stringify({
-  //       headline: articleHeadline,
-  //       body: articleBody,
-  //       user_id: userId,
-  //       likes: 0
-  //     })
-  //   }
-  //   console.log(config, "config obj for post")
-  //   fetch(`http://localhost:3000/api/v1/users/${userId}/articles`, config)
-  //   .then(res => res.json())
-  //   .then(res => {
-  //       this.setState({articles: [...this.state.articles, res]}, () => console.log(this.state.articles, "after fetch2articles"))
-  //   })
-  // }
+//moving this post fetch to actions postMusing
 
   renderMusingForm = () => {
     this.setState({musingForm: true})
@@ -94,13 +83,21 @@ class CurrentUserProfile extends React.Component {
   }
 
   render(){
-    console.log(this.state.articles, "the articles")
+    console.log(this.props.musings[0], "should have state mapped to these props")
+    !!this.props.currentUser.user ?
+    console.log(this.props.currentUser.user.id, "is this user id?") : console.log("")
     let allMusings
-    if (!!this.state.musings) {
-    let allMusings2 = this.state.musings.map(musing => {
+    if (!!this.props.musings[0]) {
+    let allMusingsFiltered = this.props.musings[0].filter(musing => {
+        return musing.user_id === this.props.currentUser.user.id
+      })
+
+    allMusings = allMusingsFiltered.map(musing => {
       return <Musing musing={musing} />
     })
-    allMusings = allMusings2.reverse()
+
+    allMusings = allMusings.reverse()
+    console.log(allMusings, "allmusings")
   }
     return (
       <div>
@@ -108,8 +105,7 @@ class CurrentUserProfile extends React.Component {
           <div>
           <h1>{this.props.currentUser.user.name}</h1>
           <p>Username: @{this.props.currentUser.user.username}</p>
-          <button onClick={this.renderArticleForm}>Write new Article</button>
-          {this.state.articleForm ? <ArticleForm submitArtHandler={this.submitArtHandler}/> : ""}
+
             <div className='musings'>
 
           <h2>Musings</h2>
@@ -124,9 +120,10 @@ class CurrentUserProfile extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+
   return state
 }
 
-const mapDispatchToProps = (dispatch) => ({getMusings: (user) => dispatch(getMusings(user)), postMusing: (musing => dispatch(postMusing(musing)))})
+const mapDispatchToProps = (dispatch) => ({getMusings: (user) => dispatch(getMusings(user)), postMusing: ((id, musing) => dispatch(postMusing(id, musing)))})
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentUserProfile);

@@ -1,6 +1,7 @@
 import React from 'react'
 import {getBands} from '../redux/actions'
 import ArticleForm from '../components/ArticleForm'
+import Article from '../components/Article'
 import {connect} from 'react-redux'
 import '../App.css';
 
@@ -17,7 +18,7 @@ class ArticleContainer extends React.Component {
     fetch(`http://localhost:3000/api/v1/articles`)
     .then(res => res.json())
     .then(res => {
-        this.setState({articles: res}, () => console.log(this.state.articles))
+        this.setState({articles: res})
     })
   }
 
@@ -27,7 +28,7 @@ class ArticleContainer extends React.Component {
     let articleBody = e.target.body.value
     let articleHeadline = e.target.headline.value
     let userId = this.props.currentUser.user.id
-    console.log(articleBody, userId)
+
     let config = {
       method: "POST",
       headers: {
@@ -54,26 +55,29 @@ class ArticleContainer extends React.Component {
     this.setState({articleForm: true})
   }
 
-  render() {
-    let users = this.props.allUsers[0]
-    let bands;
-    let bandComponents;
-    !!users ? bands = users.filter(band => {
-      return band.is_band
-    })
-    : console.log(users, "USERS")
+  openArticle = () => {
 
-    console.log(this.props, "props in render")
+  }
+
+  renderArticleForm = () => {
+    this.setState({articleForm: true})
+  }
+
+  render() {
+
     let allArticles;
     let author;
     if (!!this.state.articles && this.props.allUsers[0]){
       allArticles = this.state.articles.map(article => {
         author = this.props.allUsers[0].find(user => {
           return user.id === article.user_id})
-        console.log(author, "author", article.user_id)
+
+
         return (
           <div>
-            <h3>{article.headline} by {author.name}</h3>
+            <div>
+              <Article article={article} author={author.name}/>
+            </div>
           </div>
         )
       })
@@ -83,7 +87,7 @@ class ArticleContainer extends React.Component {
       <button onClick={this.renderArticleForm}>Write new Article</button>
       {this.state.articleForm ? <ArticleForm submitArtHandler={this.submitArtHandler}/> : ""}
         <h2>Daily Articles</h2>
-        {allArticles}
+        {allArticles !== undefined ? allArticles.reverse() : ""}
 
       </div>
     )

@@ -10,13 +10,15 @@ export const logoutUser = ({}) => {
 }
 
 export const getCurrentUser = (user) => {
+  let token = localStorage.getItem('token')
   return (dispatch) => {
+
     return fetch(`http://localhost:3000/api/v1/users`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        Authorization: 'Bearer'
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         name: user.name,
@@ -36,7 +38,7 @@ export const getCurrentUser = (user) => {
 
 export const getUser = (user) => {
   return (dispatch) => {
-    return fetch(`http://localhost:3000/api/v1/login/`, {
+    return fetch(`http://localhost:3000/api/v1/signup/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,9 +57,10 @@ export const getUser = (user) => {
   }
 }
 
-export const getMusings = (musings) => {
+export const getMusings = (id) => {
+
   return (dispatch) => {
-    return fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/musings`)
+    return fetch(`http://localhost:3000/api/v1/users/${id}/musings`)
     .then(res => res.json())
     .then(res => {
         dispatch(fillMusings(res))
@@ -65,9 +68,9 @@ export const getMusings = (musings) => {
   }
 }
 
-export const postMusing = (musings) => {
+export const postMusing = (id, config) => {
   return (dispatch) => {
-    return fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/musings`)
+    return fetch(`http://localhost:3000/api/v1/users/${id}/musings`, config)
     .then(res => res.json())
     .then(res => {
         dispatch(newMusing(res))
