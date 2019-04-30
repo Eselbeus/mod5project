@@ -16,10 +16,15 @@ class Api::V1::MusingsController < ApplicationController
     render json: @musing
   end
 
+  def destroy
+  
+    @musing = Musing.find(params[:id])
+    @musing.destroy
+  end
 
   private
 
   def musing_params
-    params.permit(:user_id, :body, :likes)
+    params.permit(:id, :user_id, :body, :likes)
   end
 end
