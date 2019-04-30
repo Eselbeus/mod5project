@@ -1,6 +1,6 @@
 import React from 'react'
 import '../App.css';
-
+import {connect} from 'react-redux'
 
 class Musing extends React.Component {
 
@@ -17,17 +17,27 @@ class Musing extends React.Component {
   }
 
   render(){
-    
+    let button;
+    if (!!this.props.currentUser.user){
+      if (this.props.musing.user_id === this.props.currentUser.user.id){
+        button = <button onClick={() => this.deleteHandler(this.props.musing.id)}>Delete</button>
+      }
+    }
+
     return (
       <div className='musing'>
         <p>{this.props.musing.body}</p>
         <div className="likes">
           <h5><b>Fanned: {this.props.musing.likes}</b></h5>
         </div>
-        <button onClick={() => this.deleteHandler(this.props.musing.id)}>Delete</button>
+        {button}
       </div>
     )
   }
 }
 
-export default Musing;
+const mapStateToProps = (state) => {
+  return state;
+}
+
+export default connect(mapStateToProps)(Musing);

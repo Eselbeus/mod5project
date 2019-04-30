@@ -2,8 +2,17 @@ import React from 'react'
 import {getBands} from '../redux/actions.js'
 import {connect} from 'react-redux'
 import Band from '../components/Band.js'
+import ArticleContainer from './ArticleContainer'
 
 class BandsContainer extends React.Component {
+  state = {
+    displayBand: true,
+    singleBand: {}
+  }
+
+  displayJustOneBand = () => {
+    this.setState({displayBand: !this.state.displayBand})
+  }
 
   componentDidMount(){
     this.props.getBands()
@@ -20,13 +29,14 @@ class BandsContainer extends React.Component {
     : console.log()
 
     !!users ? bandComponents = bands.map(band => {
-      return <Band band={band} />
+      return <Band band={band} displayJustOneBand={this.displayJustOneBand}/>
     }) : console.log()
 
 
     return (
       <div>
-        {bandComponents}
+        {this.state.displayBand ? bandComponents : ''}
+        <ArticleContainer />
       </div>
     )
   }
