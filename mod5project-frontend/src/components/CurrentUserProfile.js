@@ -56,35 +56,34 @@ class CurrentUserProfile extends React.Component {
     })
   }
 
-  submitArtHandler = (e) => {
-    e.preventDefault()
-    console.log("inside submitHandler")
-    let articleBody = e.target.body.value
-    let articleHeadline = e.target.headline.value
-    let userId = this.props.currentUser.user.id
-    console.log(articleBody, userId)
-    let config = {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        "Accept": 'application/json',
-        Authorization: 'Bearer'
-      },
-      body: JSON.stringify({
-        headline: articleHeadline,
-        body: articleBody,
-        user_id: userId,
-        likes: 0
-      })
-    }
-    console.log(config, "config obj for post")
-    fetch(`http://localhost:3000/api/v1/users/${userId}/articles`, config)
-    .then(res => res.json())
-    .then(res => {
-
-        this.setState({articles: [...this.state.articles, res]}, () => console.log(res, "after fetch2articles"))
-    })
-  }
+  // submitArtHandler = (e) => {
+  //   e.preventDefault()
+  //   console.log("inside submitHandler")
+  //   let articleBody = e.target.body.value
+  //   let articleHeadline = e.target.headline.value
+  //   let userId = this.props.currentUser.user.id
+  //   console.log(articleBody, userId)
+  //   let config = {
+  //     method: "POST",
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       "Accept": 'application/json',
+  //       Authorization: 'Bearer'
+  //     },
+  //     body: JSON.stringify({
+  //       headline: articleHeadline,
+  //       body: articleBody,
+  //       user_id: userId,
+  //       likes: 0
+  //     })
+  //   }
+  //   console.log(config, "config obj for post")
+  //   fetch(`http://localhost:3000/api/v1/users/${userId}/articles`, config)
+  //   .then(res => res.json())
+  //   .then(res => {
+  //       this.setState({articles: [...this.state.articles, res]}, () => console.log(this.state.articles, "after fetch2articles"))
+  //   })
+  // }
 
   renderMusingForm = () => {
     this.setState({musingForm: true})
@@ -95,7 +94,7 @@ class CurrentUserProfile extends React.Component {
   }
 
   render(){
-
+    console.log(this.state.articles, "the articles")
     let allMusings
     if (!!this.state.musings) {
     let allMusings2 = this.state.musings.map(musing => {
