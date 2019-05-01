@@ -18,6 +18,12 @@ export default function reducer(state = initialState, action){
       return {...state, musings: [action.payload]}
     case 'POST_MUSING':
       return {...state, musings: [[...state.musings[0], action.payload]]}
+    case 'DELETE_MUSING':
+
+      let filteredMusings = state.musings[0].filter(musing => {
+        return musing.id !== action.payload
+      })
+      return {...state, musings: [filteredMusings]}
     default:
       return state;
   }

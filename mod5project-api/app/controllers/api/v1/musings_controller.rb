@@ -17,7 +17,6 @@ class Api::V1::MusingsController < ApplicationController
   end
 
   def destroy
-  
     @musing = Musing.find(params[:id])
     @musing.destroy
   end

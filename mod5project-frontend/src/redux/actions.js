@@ -2,6 +2,7 @@ export const loadUser = (user) => ({type: "LOAD_USER", payload: user})
 export const fillBands = (bands) => ({type: "GET_BANDS", payload: bands})
 export const fillMusings = (musings) => ({type: "GET_MUSINGS", payload: musings})
 export const newMusing = (musing) => ({type: "POST_MUSING", payload: musing})
+export const removeMusing = (id) => ({type: "DELETE_MUSING", payload: id})
 
 // const getUser = (user) => ({type: "GET_USER", payload: user})
 export const logoutUser = ({}) => {

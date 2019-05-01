@@ -5,6 +5,7 @@ import Musing from './Musing'
 import '../App.css';
 import {getMusings} from '../redux/actions.js'
 import {postMusing} from '../redux/actions.js'
+import {removeMusing} from '../redux/actions.js'
 
 class CurrentUserProfile extends React.Component {
   state = {
@@ -115,6 +116,23 @@ class CurrentUserProfile extends React.Component {
     })
   }
 
+  deleteHandler = (id) => {
+    console.log(id)
+    this.props.removeMusing(id)
+    fetch(`http://localhost:3000/api/v1/musings/${id}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json',
+         Authorization: `Bearer`
+      }
+    })
+    // .then(res => res.json())
+    // .then(res => {
+    //   console.log(res, "from delete")
+    // })
+  }
+
   render(){
     console.log(this.props.musings[0], "should have state mapped to these props")
     !!this.props.currentUser.user ?
@@ -126,7 +144,7 @@ class CurrentUserProfile extends React.Component {
       })
 
     allMusings = allMusingsFiltered.map(musing => {
-      return <Musing musing={musing} />
+      return <Musing musing={musing} deleteHandler={this.deleteHandler}/>
     })
 
     allMusings = allMusings.reverse()
@@ -170,6 +188,6 @@ const mapStateToProps = (state) => {
   return state
 }
 
-const mapDispatchToProps = (dispatch) => ({getMusings: (user) => dispatch(getMusings(user)), postMusing: ((id, musing) => dispatch(postMusing(id, musing)))})
+const mapDispatchToProps = (dispatch) => ({getMusings: (user) => dispatch(getMusings(user)), removeMusing: (id) => dispatch(removeMusing(id)), postMusing: ((id, musing) => dispatch(postMusing(id, musing)))})
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentUserProfile);

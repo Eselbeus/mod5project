@@ -6,13 +6,17 @@ class Musing extends React.Component {
 
   deleteHandler = (id) => {
     console.log(id)
-    fetch(`http://localhost:3000/musings/${id}`, {
+    fetch(`http://localhost:3000/api/v1/musings/${id}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
         'Accepts': 'application/json',
          Authorization: `Bearer`
       }
+    })
+    .then(res => res.json())
+    .then(res => {
+
     })
   }
 
@@ -24,7 +28,7 @@ class Musing extends React.Component {
     let button;
     if (!!this.props.currentUser.user){
       if (this.props.musing.user_id === this.props.currentUser.user.id){
-        button = <button onClick={() => this.deleteHandler(this.props.musing.id)}>Delete</button>
+        button = <button onClick={() => this.props.deleteHandler(this.props.musing.id)}>Delete</button>
       }
     }
 
