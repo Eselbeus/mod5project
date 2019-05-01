@@ -64,7 +64,7 @@ class ArticleContainer extends React.Component {
   }
 
   render() {
-
+    console.log(this.state.articles, "articles here")
     let allArticles;
     let author;
     if (!!this.state.articles && this.props.allUsers[0]){

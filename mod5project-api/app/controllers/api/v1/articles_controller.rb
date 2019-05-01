@@ -14,7 +14,7 @@ class Api::V1::ArticlesController < ApplicationController
     @user = User.find(article_params[:user_id])
 
     @article = Article.create(article_params)
-    
+
     @user.articles << @article
     render json: @article
   end
@@ -22,6 +22,6 @@ class Api::V1::ArticlesController < ApplicationController
   private
 
   def article_params
-    params.permit(:id, :user_id, :headline, :body, :likes)
+    params.permit(:id, :user_id, :headline, :body, :likes, :created_at)
   end
 end
