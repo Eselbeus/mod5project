@@ -18,7 +18,7 @@ class Nav extends React.Component {
         <NavLink to='/'>Home</NavLink>
         {isBand === false ?
         <NavLink to='/bands'>Bands</NavLink> : ""}
-        <NavLink to='/followers'>Followers</NavLink>
+        <NavLink to='/fans'>Fans</NavLink>
         <NavLink onClick={this.props.logoutUser} to='/'>Logout</NavLink>
       </nav>
 

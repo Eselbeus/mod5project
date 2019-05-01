@@ -11,6 +11,7 @@ import reducer from './redux/reducer.js'
 import './index.css';
 import App from './App';
 import BandsContainer from './containers/BandsContainer';
+import ProfileContainer from './containers/ProfileContainer'
 import {Provider} from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 
@@ -20,6 +21,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Nav />
+      <Route exact path='/fans' component={ProfileContainer}/>
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/" component={App} />
       <Route exact path="/bands" component={BandsContainer} />

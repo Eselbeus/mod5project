@@ -134,7 +134,7 @@ class CurrentUserProfile extends React.Component {
   }
 
   render(){
-    console.log(this.props.musings[0], "should have state mapped to these props")
+  
     !!this.props.currentUser.user ?
     console.log(this.props.currentUser.user.id, "is this user id?") : console.log("")
     let allMusings

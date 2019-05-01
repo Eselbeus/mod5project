@@ -8,13 +8,13 @@ class Band extends React.Component {
   // }
 
   profileLoad = () => {
-    
+
     this.props.displayJustOneBand(this.props.band.id)
     // this.setState({bandProfile: true}, () => console.log(this.state, 'profilestate'))
   }
 
   render(){
-    console.log(this.props, "the band props")
+    
     return (
       <div>
         <div>

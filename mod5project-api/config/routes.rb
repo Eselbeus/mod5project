@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
       resources :articles
       resources :musings
+      resources :matches
 
       post '/signup', to: 'auth#create'
       post '/login', to: 'auth#show'
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
       get '/users/:id/musings', to: 'musings#index'
       post '/users/:id/articles', to: 'articles#index'
       delete '/musings/:id', to: 'musings#destroy'
+      get 'users/:id/matches', to: 'matches#index'
 
     end
   end
