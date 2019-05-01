@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Musing from './Musing'
+import {getUser} from '../redux/actions'
 
 class Profile extends React.Component {
   state = {
@@ -8,6 +9,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount(){
+    // this.props.getUser()
     fetch(`http://localhost:3000/api/v1/users/${this.props.band.id}/musings`)
     .then(res => res.json())
     .then(res => {
@@ -17,6 +19,16 @@ class Profile extends React.Component {
     })
   }
 
+  followBand = () => {
+    let bandId = this.props.band.id
+    console.log(bandId)
+    if (!!this.props.currentUser.user){
+      let userId = this.props.currentUser.user.id
+      //WHY DO I NEVER HAVE A USER WHEN I'M LOGGED IN!!!
+    }
+
+    console.log(this.props)
+  }
 
   render(){
     console.log(this.props.band.id, "what are the band profile props", this.state.musings)
@@ -38,7 +50,7 @@ class Profile extends React.Component {
         <div>
         <h1>{this.props.band.name}</h1>
         <h4>Band/Musician</h4>
-        <button>Follow {this.props.band.name}</button>
+        <button onClick={this.followBand}>Follow {this.props.band.name}</button>
         <button>Find fans of {this.props.band.name}</button>
         <p>{this.props.band.bio}Bio</p>
         <div>{musings}</div>
@@ -52,4 +64,6 @@ const mapStateToProps = (state) => {
   return state;
 }
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = (dispatch) => ({getUser: (user) => dispatch(getUser(user))})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

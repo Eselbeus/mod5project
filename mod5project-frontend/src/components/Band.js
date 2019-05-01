@@ -1,6 +1,6 @@
 import React from 'react'
 import Profile from './Profile'
-
+import { BrowserRouter as Link, NavLink, Router } from 'react-router-dom'
 
 class Band extends React.Component {
   // state = {
@@ -8,7 +8,7 @@ class Band extends React.Component {
   // }
 
   profileLoad = () => {
-
+    
     this.props.displayJustOneBand(this.props.band.id)
     // this.setState({bandProfile: true}, () => console.log(this.state, 'profilestate'))
   }

@@ -10,7 +10,10 @@ class CurrentUserProfile extends React.Component {
   state = {
     musingForm: false,
     articleForm: false,
-    musings: []
+    musings: [],
+    editForm: false,
+    bio: '',
+    location: ''
   }
 //getting rid of the musings in this state
 
@@ -82,6 +85,36 @@ class CurrentUserProfile extends React.Component {
     this.setState({articleForm: true})
   }
 
+  showEditForm = () => {
+    this.setState({editForm: !this.state.editForm})
+  }
+
+  editProfile = (e) => {
+    this.setState({[e.target.name]: e.target.value}, () => console.log(this.state))
+  }
+
+  submitProfileInfo = (e, id) => {
+    e.preventDefault()
+    console.log('hi', e, id)
+    let config = {
+      method: "PATCH",
+      headers: {'Content-Type': 'application/json',
+      "Accept": 'application/json',
+      Authorization: 'Bearer'
+      },
+      body: JSON.stringify({
+        bio: e.target.bio.value,
+        location: e.target.location.value
+      })
+    }
+    console.log(config)
+    fetch(`http://localhost:3000/api/v1/users/${id}`, config)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+    })
+  }
+
   render(){
     console.log(this.props.musings[0], "should have state mapped to these props")
     !!this.props.currentUser.user ?
@@ -97,7 +130,7 @@ class CurrentUserProfile extends React.Component {
     })
 
     allMusings = allMusings.reverse()
-    console.log(allMusings, "allmusings")
+
   }
     return (
       <div>
@@ -105,6 +138,19 @@ class CurrentUserProfile extends React.Component {
           <div>
           <h1>{this.props.currentUser.user.name}</h1>
           <p>Username: @{this.props.currentUser.user.username}</p>
+          {!!this.props.currentUser.user.bio ? <p>Bio: {this.props.currentUser.user.bio}</p> : ''}
+          {!!this.props.currentUser.user.location ? <p>Location: {this.props.currentUser.user.location}</p> : ''}
+          <div>
+            {this.state.editForm ? <form onSubmit={(e) => this.submitProfileInfo(e, this.props.currentUser.user.id)}>
+              <label>Bio: </label>
+              <input type='text' name="bio" onChange={this.editProfile} value={this.state.bio} />
+              <br/>
+              <label>Location: </label>
+              <input type='text' name="location" onChange={this.editProfile} value={this.state.location} />
+              <br/>
+              <input type='submit' value="Update Profile" />
+              </form> : <button onClick={this.showEditForm}>Edit Profile</button>}
+          </div>
 
             <div className='musings'>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter as Router, Route} from "react-router-dom"
+import Profile from './components/Profile'
 
 import Nav from './components/Nav'
 
@@ -19,7 +20,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Nav />
-      
+      <Route exact path="/profile" component={Profile} />
       <Route exact path="/" component={App} />
       <Route exact path="/bands" component={BandsContainer} />
     </Router>

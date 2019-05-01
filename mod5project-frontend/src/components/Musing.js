@@ -16,6 +16,10 @@ class Musing extends React.Component {
     })
   }
 
+  fanButton = () => {
+    console.log("thank you for clicking the fan button; it's not operational yet")
+  }
+
   render(){
     let button;
     if (!!this.props.currentUser.user){
@@ -29,6 +33,7 @@ class Musing extends React.Component {
         <p>{this.props.musing.body}</p>
         <div className="likes">
           <h5><b>Fanned: {this.props.musing.likes}</b></h5>
+          <button onClick={this.fanButton}>Fan</button>
         </div>
         {button}
       </div>
