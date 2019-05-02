@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import Band from '../components/Band.js'
 import ArticleContainer from './ArticleContainer'
 
-
 class BandsContainer extends React.Component {
   state = {
     displayBand: true,

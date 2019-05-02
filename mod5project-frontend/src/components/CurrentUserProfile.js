@@ -11,38 +11,21 @@ class CurrentUserProfile extends React.Component {
   state = {
     musingForm: false,
     articleForm: false,
-    musings: [],
     editForm: false,
     bio: '',
-    location: ''
+    location: '',
+    genre: '',
+    age: null,
+    members: '',
+    gender: ''
   }
-//getting rid of the musings in this state
 
-  componentDidMount(){
-
-// this.props.getMusings(this.props.currentUser.user.id)
-  //   if (this.props.currentUser.user !== {}){
-  //     debugger
-  //   this.props.getMusings(this.props.currentUser.user.id)
-  // }
-  //   if (this.props.currentUser.user !== undefined){
-  //     debugger
-  //   this.props.getMusings()
-  //   }
-  }
 
   componentDidUpdate(){
     // this.props.getMusings()
 
     if (this.props.currentUser.user !== undefined && this.props.musings.length === 0){
       this.props.getMusings(this.props.currentUser.user.id)
-    // fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/musings`)
-    // .then(res => res.json())
-    // .then(res => {
-    //   if (this.state.musings.length !== res.length){
-    //     this.setState({musings: res}, () => console.log(res, "after state update"))
-    //   }
-    // })
     }
   }
 //moving this get fetch to actions getMusings
@@ -68,13 +51,6 @@ class CurrentUserProfile extends React.Component {
     }
     console.log(config, "config prior to action")
     this.props.postMusing(this.props.currentUser.user.id, config)
-    // console.log(config, "config obj for post")
-    // fetch(`http://localhost:3000/api/v1/users/${userId}/musings`, config)
-    // .then(res => res.json())
-    // .then(res => {
-    //
-    //     this.setState({musings: [...this.state.musings, res]}, () => console.log(res, "after fetch2"))
-    // })
   }
 //moving this post fetch to actions postMusing
 
@@ -96,23 +72,44 @@ class CurrentUserProfile extends React.Component {
 
   submitProfileInfo = (e, id) => {
     e.preventDefault()
-    console.log('hi', e, id)
-    let config = {
-      method: "PATCH",
-      headers: {'Content-Type': 'application/json',
-      "Accept": 'application/json',
-      Authorization: 'Bearer'
-      },
-      body: JSON.stringify({
-        bio: e.target.bio.value,
-        location: e.target.location.value
-      })
+    let config;
+    console.log(this.props.currentUser.user.is_band)
+    if (!!this.props.currentUser.user.is_band){
+      config = {
+        method: "PATCH",
+        headers: {'Content-Type': 'application/json',
+        "Accept": 'application/json',
+        Authorization: 'Bearer'
+        },
+        body: JSON.stringify({
+          bio: e.target.bio.value,
+          location: e.target.location.value,
+          members: e.target.members.value,
+          genre: e.target.genre.value
+        })
+      }
     }
-    console.log(config)
+    else {
+      config = {
+        method: "PATCH",
+        headers: {'Content-Type': 'application/json',
+        "Accept": 'application/json',
+        Authorization: 'Bearer'
+        },
+        body: JSON.stringify({
+          bio: e.target.bio.value,
+          location: e.target.location.value,
+          age: e.target.age.value,
+          gender: e.target.gender.value
+        })
+      }
+    }
     fetch(`http://localhost:3000/api/v1/users/${id}`, config)
     .then(res => res.json())
     .then(res => {
-      console.log(res)
+      console.log(res.bio, "here's the response")
+      this.setState({editForm: false}, console.log(this.props, "props here...looking for loaduser"))
+      this.props.logUser(res)
     })
   }
 
@@ -127,16 +124,9 @@ class CurrentUserProfile extends React.Component {
          Authorization: `Bearer`
       }
     })
-    // .then(res => res.json())
-    // .then(res => {
-    //   console.log(res, "from delete")
-    // })
   }
 
   render(){
-
-    !!this.props.currentUser.user ?
-    console.log(this.props.currentUser.user.id, "is this user id?") : console.log("")
     let allMusings
     if (!!this.props.musings[0]) {
     let allMusingsFiltered = this.props.musings[0].filter(musing => {
@@ -146,9 +136,7 @@ class CurrentUserProfile extends React.Component {
     allMusings = allMusingsFiltered.map(musing => {
       return <Musing musing={musing} deleteHandler={this.deleteHandler}/>
     })
-
     allMusings = allMusings.reverse()
-
   }
     return (
       <div>
@@ -156,15 +144,25 @@ class CurrentUserProfile extends React.Component {
           <div>
           <h1>{this.props.currentUser.user.name}</h1>
           <p>Username: @{this.props.currentUser.user.username}</p>
-          {!!this.props.currentUser.user.bio ? <p>Bio: {this.props.currentUser.user.bio}</p> : ''}
           {!!this.props.currentUser.user.location ? <p>Location: {this.props.currentUser.user.location}</p> : ''}
+          {!!this.props.currentUser.user.genre ? <p>Genre:: {this.props.currentUser.user.genre}</p> : ''}
+          {!!this.props.currentUser.user.age ? <p>Age: {this.props.currentUser.user.age}</p> : ''}
+          {!!this.props.currentUser.user.members ? <p>Members: {this.props.currentUser.user.members}</p> : ''}
+          {!!this.props.currentUser.user.gender ? <p>Gender: {this.props.currentUser.user.gender}</p> : ''}
+          {!!this.props.currentUser.user.bio ? <p>Bio: {this.props.currentUser.user.bio}</p> : ''}
           <div>
             {this.state.editForm ? <form onSubmit={(e) => this.submitProfileInfo(e, this.props.currentUser.user.id)}>
-              <label>Bio: </label>
-              <input type='text' name="bio" onChange={this.editProfile} value={this.state.bio} />
-              <br/>
               <label>Location: </label>
               <input type='text' name="location" onChange={this.editProfile} value={this.state.location} />
+              <br/>
+              {this.props.currentUser.user.is_band ? <label>Genre: </label> : <label>Age</label>}
+              {this.props.currentUser.user.is_band ? <input type='text' name="genre" onChange={this.editProfile} value={this.state.genre} /> : <input type='text' name="age" onChange={this.editProfile} value={this.state.age} />}
+              <br/>
+              {this.props.currentUser.user.is_band ? <label>Members: </label> : <label>Gender</label>}
+              {this.props.currentUser.user.is_band ? <input type='text' name="members" onChange={this.editProfile} value={this.state.members} /> : <input type='text' name="gender" onChange={this.editProfile} value={this.state.gender} />}
+              <br/>
+              <label>Bio: </label>
+              <input type='text' name="bio" onChange={this.editProfile} value={this.state.bio} />
               <br/>
               <input type='submit' value="Update Profile" />
               </form> : <button onClick={this.showEditForm}>Edit Profile</button>}

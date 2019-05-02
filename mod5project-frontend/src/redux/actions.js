@@ -4,7 +4,6 @@ export const fillMusings = (musings) => ({type: "GET_MUSINGS", payload: musings}
 export const newMusing = (musing) => ({type: "POST_MUSING", payload: musing})
 export const removeMusing = (id) => ({type: "DELETE_MUSING", payload: id})
 
-// const getUser = (user) => ({type: "GET_USER", payload: user})
 export const logoutUser = ({}) => {
   localStorage.clear()
   return ({type: "LOGOUT_USER", payload: {}})

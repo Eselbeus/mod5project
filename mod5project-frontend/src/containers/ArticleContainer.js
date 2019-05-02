@@ -5,7 +5,6 @@ import Article from '../components/Article'
 import {connect} from 'react-redux'
 import '../App.css';
 
-// import Article from './components/Article'
 
 class ArticleContainer extends React.Component {
   state = {
@@ -69,7 +68,7 @@ class ArticleContainer extends React.Component {
     if (!!this.state.articles && this.props.allUsers[0]){
       allArticles = this.state.articles.map(article => {
         author = this.props.allUsers[0].find(user => {
-          
+
           return user.id === article.user_id})
 
 

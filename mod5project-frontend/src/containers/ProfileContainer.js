@@ -11,8 +11,6 @@ class ProfileContainer extends React.Component {
     matches: []
   }
 
-
-
   componentDidMount() {
     this.props.getBands()
     let token = localStorage.getItem('token')
@@ -30,10 +28,7 @@ class ProfileContainer extends React.Component {
 
             this.props.loadUser(res)})
     }
-    console.log("yooooo")
 
-    // let current = this.props.currentUser.user.id
-    // console.log(current, "currentid")
   }
 
   componentWillUpdate() {
@@ -41,8 +36,8 @@ class ProfileContainer extends React.Component {
       fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/matches`)
       .then(res => res.json())
       .then(res => {
-        this.setState({matches: res}, () => console.log(this.state))
-        console.log('fetched whoooo', res)
+        this.setState({matches: res})
+
       })
       this.setState({loop: 2})
     }
@@ -50,30 +45,26 @@ class ProfileContainer extends React.Component {
 
   render(){
     let usersConnected
-    console.log(this.state.matches, "matches in render")
-    console.log(this.props.currentUser, "current user in render")
-    console.log(this.props.allUsers[0], "bands???")
+    // console.log(this.state.matches, "matches in render")
+    // console.log(this.props.currentUser, "current user in render")
+    // console.log(this.props.allUsers[0], "bands???")
     if (!!this.props.currentUser.user && this.state.matches.length > 0){
       let usersConnected2 = this.state.matches.filter(user => {
         return user.user_id === this.props.currentUser.user.id
       })
       usersConnected = usersConnected2
-      console.log(usersConnected)
       let usersConnectedIds = usersConnected.map(user => {
         return user.matched_user_id
       })
-      console.log(usersConnectedIds, "the ids!!!")
       let filteredUsers = this.props.allUsers[0].filter(user => {
         return usersConnectedIds.includes(user.id)
       })
-      console.log(filteredUsers, "filteredUsers!!!")
       let mappedToComponents = filteredUsers.map(user => {
         return <User user={user} />
       })
       usersConnected = mappedToComponents
     }
 
-    console.log(usersConnected, "u")
     return (
       <div>{usersConnected}</div>
     )
