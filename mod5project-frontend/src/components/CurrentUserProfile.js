@@ -134,7 +134,7 @@ class CurrentUserProfile extends React.Component {
   }
 
   render(){
-  
+
     !!this.props.currentUser.user ?
     console.log(this.props.currentUser.user.id, "is this user id?") : console.log("")
     let allMusings

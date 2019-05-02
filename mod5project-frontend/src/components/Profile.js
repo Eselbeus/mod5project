@@ -78,7 +78,10 @@ class Profile extends React.Component {
         <button onClick={this.followBand}>Follow {this.props.band.name}</button>
         <button>Find fans of {this.props.band.name}</button>
         <p>{this.props.band.bio}</p>
-        <div>{musings}</div>
+        <div>
+        <h2>Musings</h2>
+        {musings}
+        </div>
         </div>
       </div>
     )
