@@ -17,7 +17,9 @@ class CurrentUserProfile extends React.Component {
     genre: '',
     age: null,
     members: '',
-    gender: ''
+    gender: '',
+    photoFile: null,
+    profilePhotoButton: true
   }
 
 
@@ -53,6 +55,26 @@ class CurrentUserProfile extends React.Component {
     this.props.postMusing(this.props.currentUser.user.id, config)
   }
 //moving this post fetch to actions postMusing
+
+  renderProfilePhotoForm = () => {
+    this.setState({profilePhotoButton: !this.state.profilePhotoButton})
+  }
+
+  handlePhotoFile = (e) => {
+    this.setState({photoFile: e.target.files[0]})
+  }
+
+  submitProfilePhoto = (e) => {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append('user[image]', this.state.photoFile)
+    let config = {
+      method: "PATCH",
+      body: formData
+    }
+    fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}`, config)
+    .then(res => console.log(res))
+  }
 
   renderMusingForm = () => {
     this.setState({musingForm: true})
@@ -150,6 +172,12 @@ class CurrentUserProfile extends React.Component {
           {!!this.props.currentUser.user.members ? <p>Members: {this.props.currentUser.user.members}</p> : ''}
           {!!this.props.currentUser.user.gender ? <p>Gender: {this.props.currentUser.user.gender}</p> : ''}
           {!!this.props.currentUser.user.bio ? <p>Bio: {this.props.currentUser.user.bio}</p> : ''}
+          <div>
+            {this.state.profilePhotoButton ? <button onClick={this.renderProfilePhotoForm}>Edit Profile Picture</button> : <form onSubmit={this.submitProfilePhoto}>
+                <input type="file" onChange={this.handlePhotoFile}/>
+                <input type="submit" value="Upload Photo"/>
+              </form>}
+          </div>
           <div>
             {this.state.editForm ? <form onSubmit={(e) => this.submitProfileInfo(e, this.props.currentUser.user.id)}>
               <label>Location: </label>

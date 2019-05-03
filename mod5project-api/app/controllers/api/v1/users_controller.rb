@@ -24,6 +24,7 @@ class Api::V1::UsersController < ApplicationController
   def update
 
     @user = User.find(params[:id])
+
     @user.update(user_update_params)
 
     render json: @user
@@ -32,11 +33,11 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:id, :name, :username, :email, :password, :gender, :age, :location, :favorite_genre, :favorite_band, :genre, :members, :bio, :valid_music_link, :is_band)
+    params.permit(:id, :name, :username, :email, :password, :gender, :age, :location, :favorite_genre, :favorite_band, :genre, :members, :bio, :valid_music_link, :is_band, :image)
   end
 
   def user_update_params
-    params.require(:user).permit(:id, :name, :username, :email, :gender, :age, :location, :favorite_genre, :favorite_band, :genre, :members, :bio, :valid_music_link, :is_band)
+    params.require(:user).permit(:id, :name, :username, :email, :gender, :age, :location, :favorite_genre, :favorite_band, :genre, :members, :bio, :valid_music_link, :is_band, :image)
   end
 
 end
