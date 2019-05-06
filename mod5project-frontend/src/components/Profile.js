@@ -100,7 +100,7 @@ class Profile extends React.Component {
     return (
       <div>
         <div className="profile-info">
-          <h1>{this.props.band.name}</h1>
+          <h1 className="headings">{this.props.band.name}</h1>
           <h2>@{this.props.band.username}</h2>
           <h4>Band/Musician</h4>
           <button onClick={this.followBand}>Follow {this.props.band.name}</button>
@@ -114,13 +114,13 @@ class Profile extends React.Component {
           <img className="profile-pic" src={`http://localhost:3000${this.props.band.imageUrl}`}/>
         </div>
 
-        {this.props.band.is_band && !!embedUrl ? <div><iframe width="696" height="522" src={embedUrl} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {this.props.band.is_band && !!this.props.band.valid_music_link ? <div><iframe width="696" height="522" src={this.props.band.valid_music_link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div> : ''}
 
 
 
         <div className="musings">
-          <h2>Musings</h2>
+          <h2 className="headings">Musings</h2>
 
           {musings}
         </div>

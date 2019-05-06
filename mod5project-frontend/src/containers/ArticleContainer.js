@@ -85,7 +85,7 @@ class ArticleContainer extends React.Component {
       <div className='articles'>
       <button onClick={this.renderArticleForm}>Write new Article</button>
       {this.state.articleForm ? <ArticleForm submitArtHandler={this.submitArtHandler}/> : ""}
-        <h2>Daily Articles</h2>
+        <h2 className="headings">Daily Articles</h2>
         {allArticles !== undefined ? allArticles.reverse() : ""}
 
       </div>

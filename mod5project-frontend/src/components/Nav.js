@@ -16,7 +16,7 @@ class Nav extends React.Component {
     return (
 
       <nav>
-        <NavLink className="nav-elem" to='/'>Home</NavLink>
+        <NavLink className="nav-elem" to='/'>Rockmuser</NavLink>
         {isBand === false ?
         <NavLink className="nav-elem" to='/bands'>Bands</NavLink> : ""}
         <NavLink className="nav-elem" to='/fans'>Fans</NavLink>

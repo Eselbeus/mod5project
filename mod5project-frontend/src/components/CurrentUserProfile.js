@@ -19,7 +19,9 @@ class CurrentUserProfile extends React.Component {
     members: '',
     gender: '',
     photoFile: null,
-    profilePhotoButton: true
+    profilePhotoButton: true,
+    profileVideoButton: true,
+    videoUrl: ''
   }
 
 
@@ -148,6 +150,36 @@ class CurrentUserProfile extends React.Component {
     })
   }
 
+  editProfileVideo = () => {
+    this.setState({profileVideoButton: false})
+  }
+
+  videoHandler = (e) => {
+    console.log(e.target.videoUrl)
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  submitVideo = (e) => {
+    e.preventDefault()
+    console.log(this.state.videoUrl, "url")
+    let videoUrl = this.state.videoUrl
+    if (videoUrl.includes("watch?v=")){
+      let splitUrl = videoUrl.split("watch?v=")
+      videoUrl = splitUrl.join("embed/")
+    }
+    console.log(videoUrl)
+    fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      },
+      body: JSON.stringify({
+        valid_music_link: videoUrl
+      })
+    })
+  }
+
   render(){
     let allMusings
     if (!!this.props.musings[0]) {
@@ -165,7 +197,7 @@ class CurrentUserProfile extends React.Component {
       <div>
           {!!this.props.currentUser.user ?
           <div className="profile-info">
-          <h1>{this.props.currentUser.user.name}</h1>
+          <h1 className="headings">{this.props.currentUser.user.name}</h1>
           <p>Username: @{this.props.currentUser.user.username}</p>
           {!!this.props.currentUser.user.location ? <p>Location: {this.props.currentUser.user.location}</p> : ''}
           {!!this.props.currentUser.user.genre ? <p>Genre:: {this.props.currentUser.user.genre}</p> : ''}
@@ -200,9 +232,17 @@ class CurrentUserProfile extends React.Component {
               </div>
           </div>
 
+            {this.props.currentUser.user.is_band ? <div className="video">
+              <button onClick={this.editProfileVideo}>Edit Profile Video</button>
+            </div> : ''}
+            {!!this.state.profileVideoButton ? '' : <form onSubmit={this.submitVideo}><label>Paste YouTube Video URL here:</label><input name="videoUrl" type="text" onChange={this.videoHandler} value={this.state.videoUrl}/><input type="submit" value="Submit"/></form>}
+
+            {this.props.currentUser.user.is_band && !!this.props.currentUser.user.valid_music_link ? <div><iframe width="696" height="522" src={this.props.currentUser.user.valid_music_link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div> : ''}
+
             <div className='musings'>
 
-          <h2>Musings</h2>
+          <h2 className="headings">Musings</h2>
           <button onClick={this.renderMusingForm}>Post new musing</button>
           {this.state.musingForm ? <MusingForm submitHandler={this.submitHandler}/> : ""}
           <div>{allMusings}</div>

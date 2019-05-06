@@ -76,6 +76,10 @@ nav {
   font-family: 'Metal Mania', cursive;
 }
 
+.headings {
+  font-family: 'Metal Mania', cursive;
+}
+
 .profile-pic {
   object-fit: scale-down;
 
@@ -114,4 +118,10 @@ nav {
 
 .profile-info {
   background-color: #EEEEEE;
+}
+
+.fan-button {
+  background-color: #111111;
+  color: #EEEEEE;
+  border-radius: 5px;
 }
