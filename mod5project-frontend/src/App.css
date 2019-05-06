@@ -43,7 +43,8 @@
   background-color: #F9F9F9;
   border-radius: 20px;
   margin-bottom: 2px;
-
+  box-shadow: 1px 2px #CCCCCC;
+  padding: 2px;
 }
 
 .likes {
@@ -56,17 +57,33 @@
 }
 
 .musings {
-  background-color: #DD3333;
+  background-color: #DD333388;
+  margin: 20px;
+  border-radius: 5px;
 }
 
 .articles {
-  background-color: #4466FF;
+  background-color: #4466FF88;
+  box-shadow: -1px -1px #CCCCCC;
+  border-radius: 5px;
 }
 
 .article {
   border-style: solid;
   border-color: #FFFFFF;
-  margin: 2px
+  border-radius: 5px;
+  margin: 2px;
+  box-shadow: 1px 1px #CCCCCC;
+  font-family: 'Times New Roman';
+  padding: 2px;
+}
+
+.article:hover {
+  border-style: solid;
+  border-color: #4466FF;
+  background-color: #FFFFFF;
+  margin: 2px;
+  box-shadow: 1px 1px #5555AA;
 }
 
 nav {

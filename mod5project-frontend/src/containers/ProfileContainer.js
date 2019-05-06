@@ -8,7 +8,18 @@ import User from '../components/User'
 class ProfileContainer extends React.Component {
   state = {
     loop: 1,
-    matches: []
+    matches: [],
+    displayUser: true,
+    singleUser: {}
+  }
+
+  displayJustOneUser = (id) => {
+    this.setState({displayUser: !this.state.displayUser})
+    fetch(`http://localhost:3000/api/v1/users/${id}`)
+    .then(res => res.json())
+    .then(res => {
+      this.setState({singleUser: res}, () => console.log("Does this work?!", this.state))
+    })
   }
 
   componentDidMount() {
@@ -60,13 +71,14 @@ class ProfileContainer extends React.Component {
         return usersConnectedIds.includes(user.id)
       })
       let mappedToComponents = filteredUsers.map(user => {
-        return <User user={user} />
+        return <User user={user} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>
       })
       usersConnected = mappedToComponents
     }
 
     return (
-      <div>{usersConnected}</div>
+
+      <div>{this.state.displayUser ? usersConnected : <User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>}</div>
     )
   }
 }
