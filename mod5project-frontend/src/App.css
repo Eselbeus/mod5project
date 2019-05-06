@@ -147,6 +147,13 @@ nav {
   display: flex;
 }
 
-.read-button {
+.read-button, .close-button, .write-article, .edit-button {
   font-family: 'Metal Mania', cursive;
+}
+
+.read-button:hover, .close-button:hover, .write-article:hover, .edit-button:hover {
+  background-color: #4466FF;
+  color: #EEEEEE;
+  font-family: 'Metal Mania', cursive;
+  border-radius: 5px;
 }

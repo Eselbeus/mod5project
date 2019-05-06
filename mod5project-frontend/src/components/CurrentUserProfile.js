@@ -206,9 +206,9 @@ class CurrentUserProfile extends React.Component {
           {!!this.props.currentUser.user.gender ? <p>Gender: {this.props.currentUser.user.gender}</p> : ''}
           {!!this.props.currentUser.user.bio ? <p>Bio: {this.props.currentUser.user.bio}</p> : ''}
           <div>
-            {this.state.profilePhotoButton ? <button onClick={this.renderProfilePhotoForm}>Edit Profile Picture</button> : <form onSubmit={this.submitProfilePhoto}>
-                <input type="file" onChange={this.handlePhotoFile}/>
-                <input type="submit" value="Upload Photo"/>
+            {this.state.profilePhotoButton ? <button className="edit-button" onClick={this.renderProfilePhotoForm}>Edit Profile Picture</button> : <form onSubmit={this.submitProfilePhoto}>
+                <input className="edit-button" type="file" onChange={this.handlePhotoFile}/>
+                <input className="edit-button" type="submit" value="Upload Photo"/>
               </form>}
           </div>
           <div>
@@ -225,8 +225,8 @@ class CurrentUserProfile extends React.Component {
               <label>Bio: </label>
               <input type='text' name="bio" onChange={this.editProfile} value={this.state.bio} />
               <br/>
-              <input type='submit' value="Update Profile" />
-              </form> : <button onClick={this.showEditForm}>Edit Profile</button>}
+              <input className="edit-button" type='submit' value="Update Profile" />
+              </form> : <button className="edit-button" onClick={this.showEditForm}>Edit Profile</button>}
               <div>
                 <img className="profile-pic" src={`http://localhost:3000${this.props.currentUser.user.imageUrl}`}/>
               </div>
