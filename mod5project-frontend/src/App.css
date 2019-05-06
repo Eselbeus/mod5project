@@ -48,12 +48,16 @@
 }
 
 .likes {
-  border-style: solid;
+  border-style: none;
   margin: 2px;
   border-radius: 20px;
   margin-left: 30%;
   margin-right: 30%;
   background-color: #FF6666;
+  object-fit: scale-down;
+  width: 100px;
+  height: 20px;
+  box-shadow: 1px 2px #CCCCCC;
 }
 
 .musings {
