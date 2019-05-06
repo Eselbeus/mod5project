@@ -16,7 +16,7 @@ class Article extends React.Component {
       <div className='article'>
         {this.state.articleOpen ? <div><h2>{this.props.article.headline} by {this.props.author}</h2>
         <p>{this.props.article.body}</p>
-        <button onClick={this.openArticle}>Close</button></div>: <div><h2>{this.props.article.headline} by {this.props.author}</h2><button onClick={this.openArticle}>Read</button></div>}
+        <button onClick={this.openArticle}>Close</button></div>: <div><h2>{this.props.article.headline} by {this.props.author}</h2><button className="read-button" onClick={this.openArticle}>Read</button></div>}
 
       </div>
     )

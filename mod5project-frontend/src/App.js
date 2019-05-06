@@ -88,8 +88,10 @@ class App extends React.Component {
           {!this.state.login ? <button onClick={this.loginButton}>Login for returning users</button> : <Login />}
         </React.Fragment> :
         ''}
-        <CurrentUserProfile logUser={this.logUser}/>
-        <ArticleContainer />
+        <div className="flex-container">
+          <CurrentUserProfile logUser={this.logUser}/>
+          <ArticleContainer />
+        </div>
       </div>
     );
   }
