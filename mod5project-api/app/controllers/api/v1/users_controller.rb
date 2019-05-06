@@ -1,12 +1,12 @@
 class Api::V1::UsersController < ApplicationController
   def index
     @users = User.all
-    render json: @users
+    render :index
   end
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render :show
   end
 
   def create
@@ -27,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
 
     @user.update(user_update_params)
 
-    render json: @user
+    render :update
   end
 
   private

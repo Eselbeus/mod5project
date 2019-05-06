@@ -16,6 +16,12 @@ class Api::V1::MusingsController < ApplicationController
     render json: @musing
   end
 
+  def update
+    @musing = Musing.find(params[:id])
+    @musing.update(musing_params)
+    render json: @musing
+  end
+
   def destroy
     @musing = Musing.find(params[:id])
     @musing.destroy
@@ -26,4 +32,5 @@ class Api::V1::MusingsController < ApplicationController
   def musing_params
     params.permit(:id, :user_id, :body, :likes)
   end
+
 end

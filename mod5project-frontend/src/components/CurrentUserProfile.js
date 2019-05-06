@@ -73,7 +73,8 @@ class CurrentUserProfile extends React.Component {
       body: formData
     }
     fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}`, config)
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(res => console.log(res, this.props.currentUser.user))
   }
 
   renderMusingForm = () => {
@@ -143,7 +144,6 @@ class CurrentUserProfile extends React.Component {
       headers: {
         'Content-Type': 'application/json',
         'Accepts': 'application/json',
-         Authorization: `Bearer`
       }
     })
   }
@@ -154,16 +154,17 @@ class CurrentUserProfile extends React.Component {
     let allMusingsFiltered = this.props.musings[0].filter(musing => {
         return musing.user_id === this.props.currentUser.user.id
       })
-
+    allMusingsFiltered = allMusingsFiltered.sort((a, b) => a.id - b.id)
     allMusings = allMusingsFiltered.map(musing => {
       return <Musing musing={musing} deleteHandler={this.deleteHandler}/>
     })
     allMusings = allMusings.reverse()
   }
+  console.log(this.props, "hello")
     return (
       <div>
           {!!this.props.currentUser.user ?
-          <div>
+          <div className="profile-info">
           <h1>{this.props.currentUser.user.name}</h1>
           <p>Username: @{this.props.currentUser.user.username}</p>
           {!!this.props.currentUser.user.location ? <p>Location: {this.props.currentUser.user.location}</p> : ''}
@@ -194,6 +195,9 @@ class CurrentUserProfile extends React.Component {
               <br/>
               <input type='submit' value="Update Profile" />
               </form> : <button onClick={this.showEditForm}>Edit Profile</button>}
+              <div>
+                <img className="profile-pic" src={`http://localhost:3000${this.props.currentUser.user.imageUrl}`}/>
+              </div>
           </div>
 
             <div className='musings'>

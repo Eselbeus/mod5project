@@ -9,11 +9,11 @@ class Band extends React.Component {
   }
 
   render(){
-
+    console.log(this.props.band, "band props")
     return (
       <div>
         <div>
-          {!this.props.displayBand ? <Profile band={this.props.band}/> : <h3 className="bandname" onClick={this.profileLoad}>{this.props.band.name}</h3>}
+          {!this.props.displayBand ? <Profile band={this.props.band}/> : <div className="browse-background" onClick={this.profileLoad}><h3 className="bandname">{this.props.band.name}</h3><img className="profile-thumbnail" src={`http://localhost:3000${this.props.band.imageUrl}`}/></div>}
         </div>
       </div>
     )

@@ -71,4 +71,47 @@
 
 nav {
   background-color: #DD0000;
+  font-size: 1.25em;
+  padding: 5px;
+  font-family: 'Metal Mania', cursive;
+}
+
+.profile-pic {
+  object-fit: scale-down;
+
+  width: 400px;
+  height: 400px;
+}
+
+.profile-thumbnail {
+  object-fit: scale-down;
+
+  width: 64px;
+  height: 64px;
+}
+
+.browse-background {
+  background-color: #EEEEEE;
+  width: 200px;
+  height: 150px;
+}
+
+.nav-elem {
+  padding-right: 15px;
+  padding-left: 15px;
+  align-items: center;
+  color: #EEEEEE;
+  text-decoration: none;
+}
+
+.nav-elem:hover {
+  padding-right: 15px;
+  align-items: center;
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.profile-info {
+  background-color: #EEEEEE;
 }

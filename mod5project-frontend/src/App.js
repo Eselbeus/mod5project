@@ -79,7 +79,8 @@ class App extends React.Component {
     console.log(localStorage.getItem('token'))
     return (
       <div className="App">
-
+        <header link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Font+Name"></header>
         <h1>{this.props.currentUser.user != undefined ? `` : "Hello Muser!"}</h1>
         {!token ?
         <React.Fragment>
