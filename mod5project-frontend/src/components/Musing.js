@@ -45,7 +45,7 @@ class Musing extends React.Component {
     let button;
     if (!!this.props.currentUser.user){
       if (this.props.musing.user_id === this.props.currentUser.user.id){
-        button = <button onClick={() => this.props.deleteHandler(this.props.musing.id)}>Delete</button>
+        button = <button className="delete" onClick={() => this.props.deleteHandler(this.props.musing.id)}>Delete</button>
       }
     }
 

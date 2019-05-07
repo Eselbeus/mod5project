@@ -79,6 +79,10 @@ class Profile extends React.Component {
     console.log(this.props, "props")
   }
 
+  // followers = () => {
+  //
+  // }
+
   render(){
     let musings;
     let embedUrl;

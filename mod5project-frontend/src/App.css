@@ -151,11 +151,11 @@ nav {
   display: flex;
 }
 
-.read-button, .close-button, .write-article, .edit-button {
+.read-button, .close-button, .write-article, .edit-button, .delete {
   font-family: 'Metal Mania', cursive;
 }
 
-.read-button:hover, .close-button:hover, .write-article:hover, .edit-button:hover {
+.read-button:hover, .close-button:hover, .write-article:hover, .edit-button:hover, .delete:hover {
   background-color: #4466FF;
   color: #EEEEEE;
   font-family: 'Metal Mania', cursive;
