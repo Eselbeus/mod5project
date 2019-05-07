@@ -3,6 +3,7 @@ export const fillBands = (bands) => ({type: "GET_BANDS", payload: bands})
 export const fillMusings = (musings) => ({type: "GET_MUSINGS", payload: musings})
 export const newMusing = (musing) => ({type: "POST_MUSING", payload: musing})
 export const removeMusing = (id) => ({type: "DELETE_MUSING", payload: id})
+export const selectBand = (band) => ({type: "SELECT_BAND", payload: band})
 
 export const logoutUser = ({}) => {
   localStorage.clear()

@@ -12,7 +12,6 @@ class User extends React.Component {
 
     return (
       <div>
-      <div>{this.props.user.name}</div>
       {!this.props.displayUser ? <div><UserProfile user={this.props.user}/></div>: <div className="browse-background" onClick={this.profileLoad}><h3 className="bandname">{this.props.user.name}unclicked</h3><img className="profile-thumbnail" src={`http://localhost:3000${this.props.user.imageUrl}`}/></div>}
       </div>
     )

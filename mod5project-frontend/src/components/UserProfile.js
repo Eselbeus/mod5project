@@ -60,7 +60,7 @@ class UserProfile extends React.Component {
 
   followUser = () => {
     let otherUserId = this.props.user.id
-    console.log(userId, "user id")
+    // console.log(userId, "user id")
     let userId = this.props.currentUser.user.id
     console.log(userId, "user id")
 
@@ -107,7 +107,7 @@ class UserProfile extends React.Component {
           <h2>@{this.props.user.username}</h2>
           <h4>user/Musician</h4>
           <button onClick={this.followUser}>Follow {this.props.user.name}</button>
-          <button>Find fans of {this.props.user.name}</button>
+          {this.props.user.is_band ? <button>Find fans of {this.props.user.name}</button> : ''}
           {this.props.user.location ? <p>Location: {this.props.user.location}</p> : ''}
           {this.props.user.genre ? <p>Genre: {this.props.user.genre}</p> : ''}
           {this.props.user.members ? <p>Members: {this.props.user.members}</p> : ''}

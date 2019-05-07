@@ -4,9 +4,8 @@ import {loadUser} from '../redux/actions'
 import {getBands} from '../redux/actions'
 import Band from '../components/Band'
 import User from '../components/User'
-import { BrowserRouter as Link, NavLink, Router } from 'react-router-dom'
 
-class ProfileContainer extends React.Component {
+class BandFollowers extends React.Component {
   state = {
     loop: 1,
     matches: [],
@@ -24,6 +23,7 @@ class ProfileContainer extends React.Component {
   }
 
   componentDidMount() {
+
     this.props.getBands()
     let token = localStorage.getItem('token')
     if (token) {
@@ -39,16 +39,17 @@ class ProfileContainer extends React.Component {
           .then(res => {
 
             this.props.loadUser(res)})
+            console.log(this.props, "props in band foll")
     }
 
   }
 
   componentWillUpdate() {
-    if (this.state.loop < 2 && !!this.props.currentUser.user) {
-      fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}/matches`)
+    if (this.state.loop < 2 && !!this.props.selectedBand) {
+      fetch(`http://localhost:3000/api/v1/users/${this.props.selectedBand.id}/matches`)
       .then(res => res.json())
       .then(res => {
-        this.setState({matches: res})
+        this.setState({matches: res}, () => console.log(res))
 
       })
       this.setState({loop: 2})
@@ -58,9 +59,9 @@ class ProfileContainer extends React.Component {
   render(){
     let usersConnected
 
-    if (!!this.props.currentUser.user && this.state.matches.length > 0){
+    if (!!this.props.selectedBand && this.state.matches.length > 0){
       let usersConnected2 = this.state.matches.filter(user => {
-        return user.user_id === this.props.currentUser.user.id
+        return user.user_id === this.props.selectedBand.id
       })
       usersConnected = usersConnected2
       let usersConnectedIds = usersConnected.map(user => {
@@ -80,6 +81,7 @@ class ProfileContainer extends React.Component {
       <div>{this.state.displayUser ? usersConnected : <User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>}</div>
     )
   }
+
 }
 
 const mapStateToProps = (state) => {
@@ -88,4 +90,4 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({loadUser: (user) => dispatch(loadUser(user)), getBands: (user) => dispatch(getBands(user))})
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(BandFollowers)

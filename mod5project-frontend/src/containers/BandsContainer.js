@@ -26,7 +26,7 @@ class BandsContainer extends React.Component {
   render(){
 
     let users = this.props.allUsers[0]
-    console.log(users)
+    
     let bands;
     let bandComponents;
     !!users ? bands = users.filter(band => {

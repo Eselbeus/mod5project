@@ -10,6 +10,7 @@ import thunk from 'redux-thunk'
 import reducer from './redux/reducer.js'
 import './index.css';
 import App from './App';
+import BandFollowers from './containers/BandFollowers';
 import BandsContainer from './containers/BandsContainer';
 import ProfileContainer from './containers/ProfileContainer'
 import {Provider} from 'react-redux'
@@ -25,6 +26,7 @@ ReactDOM.render(
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/" component={App} />
       <Route exact path="/bands" component={BandsContainer} />
+      <Route exact path="/bandfollowers" component={BandFollowers} />
     </Router>
   </Provider>
   , document.getElementById('root'));

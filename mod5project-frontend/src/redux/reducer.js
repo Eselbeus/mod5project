@@ -1,7 +1,8 @@
 const initialState = {
   currentUser: {},
   allUsers: [],
-  musings: []
+  musings: [],
+  selectedBand: {}
 }
 
 export default function reducer(state = initialState, action){
@@ -14,6 +15,8 @@ export default function reducer(state = initialState, action){
       return {...state, currentUser: action.payload}
     case 'GET_BANDS':
       return {...state, allUsers: [action.payload]}
+    case 'SELECT_BAND':
+      return {...state, selectedBand: action.payload}
     case 'GET_MUSINGS':
       return {...state, musings: [action.payload]}
     case 'POST_MUSING':

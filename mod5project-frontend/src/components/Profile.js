@@ -4,6 +4,8 @@ import Musing from './Musing'
 import {getUser} from '../redux/actions'
 import {loadUser} from '../redux/actions'
 import '../App.css';
+import {withRouter} from 'react-router-dom'
+import {selectBand} from '../redux/actions'
 
 class Profile extends React.Component {
   state = {
@@ -11,6 +13,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount(){
+          console.log("band now?", this.props)
     let token = localStorage.getItem('token')
     if (token) {
       fetch("http://localhost:3000/api/v1/login", {
@@ -31,7 +34,12 @@ class Profile extends React.Component {
       if (this.state.musings.length !== res.length){
         this.setState({musings: res})
       }
+      console.log(this.props, "is this band?!")
+      // this.props.selectBand(this.props.band)
+
     })
+    // this.props.selectBand(this.props.band)
+    console.log("band now?", this.props)
   }
 
   updateMusings = () => {
@@ -79,11 +87,14 @@ class Profile extends React.Component {
     console.log(this.props, "props")
   }
 
-  // followers = () => {
-  //
-  // }
+  followers = (e) => {
+    console.log("clicked")
+    this.props.history.push('/bandfollowers')
+  }
 
   render(){
+    console.log(this.props, "propsinprofile")
+    this.props.selectBand(this.props.band)
     let musings;
     let embedUrl;
     if (this.state.musings.length > 0) {
@@ -108,7 +119,7 @@ class Profile extends React.Component {
           <h2>@{this.props.band.username}</h2>
           <h4>Band/Musician</h4>
           <button onClick={this.followBand}>Follow {this.props.band.name}</button>
-          <button>Find fans of {this.props.band.name}</button>
+          <button onClick={this.followers}>Find fans of {this.props.band.name}</button>
           {this.props.band.location ? <p>Location: {this.props.band.location}</p> : ''}
           {this.props.band.genre ? <p>Genre: {this.props.band.genre}</p> : ''}
           {this.props.band.members ? <p>Members: {this.props.band.members}</p> : ''}
@@ -138,6 +149,6 @@ const mapStateToProps = (state) => {
   return state;
 }
 
-const mapDispatchToProps = (dispatch) => ({getUser: (user) => dispatch(getUser(user)), loadUser: (user) => dispatch(loadUser(user))})
+const mapDispatchToProps = (dispatch) => ({getUser: (user) => dispatch(getUser(user)), loadUser: (user) => dispatch(loadUser(user)), selectBand: (band) => dispatch(selectBand(band))})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));
