@@ -36,6 +36,10 @@
   background-color: #EEEEEE;
 }
 
+.profile-and-musings {
+  display: flex;
+}
+
 .musing {
   border-style: none;
   margin-left: 100px;
@@ -91,6 +95,7 @@ nav {
 
 .headings {
   font-family: 'Metal Mania', cursive;
+  text-align: center;
 }
 
 .profile-pic {
@@ -131,6 +136,7 @@ nav {
 
 .profile-info {
   background-color: #EEEEEE;
+
 }
 
 .fan-button {

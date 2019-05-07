@@ -194,43 +194,50 @@ class CurrentUserProfile extends React.Component {
   }
   console.log(this.props, "hello")
     return (
-      <div>
-          {!!this.props.currentUser.user ?
+      <React.Fragment className="profile-and-musings">
+        {!!this.props.currentUser.user ?
           <div className="profile-info">
-          <h1 className="headings">{this.props.currentUser.user.name}</h1>
-          <p>Username: @{this.props.currentUser.user.username}</p>
-          {!!this.props.currentUser.user.location ? <p>Location: {this.props.currentUser.user.location}</p> : ''}
-          {!!this.props.currentUser.user.genre ? <p>Genre:: {this.props.currentUser.user.genre}</p> : ''}
-          {!!this.props.currentUser.user.age ? <p>Age: {this.props.currentUser.user.age}</p> : ''}
-          {!!this.props.currentUser.user.members ? <p>Members: {this.props.currentUser.user.members}</p> : ''}
-          {!!this.props.currentUser.user.gender ? <p>Gender: {this.props.currentUser.user.gender}</p> : ''}
-          {!!this.props.currentUser.user.bio ? <p>Bio: {this.props.currentUser.user.bio}</p> : ''}
-          <div>
-            {this.state.profilePhotoButton ? <button className="edit-button" onClick={this.renderProfilePhotoForm}>Edit Profile Picture</button> : <form onSubmit={this.submitProfilePhoto}>
-                <input className="edit-button" type="file" onChange={this.handlePhotoFile}/>
-                <input className="edit-button" type="submit" value="Upload Photo"/>
-              </form>}
-          </div>
-          <div>
-            {this.state.editForm ? <form onSubmit={(e) => this.submitProfileInfo(e, this.props.currentUser.user.id)}>
-              <label>Location: </label>
-              <input type='text' name="location" onChange={this.editProfile} value={this.state.location} />
-              <br/>
-              {this.props.currentUser.user.is_band ? <label>Genre: </label> : <label>Age</label>}
-              {this.props.currentUser.user.is_band ? <input type='text' name="genre" onChange={this.editProfile} value={this.state.genre} /> : <input type='text' name="age" onChange={this.editProfile} value={this.state.age} />}
-              <br/>
-              {this.props.currentUser.user.is_band ? <label>Members: </label> : <label>Gender</label>}
-              {this.props.currentUser.user.is_band ? <input type='text' name="members" onChange={this.editProfile} value={this.state.members} /> : <input type='text' name="gender" onChange={this.editProfile} value={this.state.gender} />}
-              <br/>
-              <label>Bio: </label>
-              <input type='text' name="bio" onChange={this.editProfile} value={this.state.bio} />
-              <br/>
-              <input className="edit-button" type='submit' value="Update Profile" />
-              </form> : <button className="edit-button" onClick={this.showEditForm}>Edit Profile</button>}
-              <div>
-                <img className="profile-pic" src={`http://localhost:3000${this.props.currentUser.user.imageUrl}`}/>
-              </div>
-          </div>
+            <h1 className="headings">{this.props.currentUser.user.name}</h1>
+
+            <span>
+              <img className="profile-pic" src={`http://localhost:3000${this.props.currentUser.user.imageUrl}`}/>
+            </span>
+
+            <p>Username: @{this.props.currentUser.user.username}</p>
+
+            {!!this.props.currentUser.user.location ? <p>Location: {this.props.currentUser.user.location}</p> : ''}
+            {!!this.props.currentUser.user.genre ? <p>Genre: {this.props.currentUser.user.genre}</p> : ''}
+            {!!this.props.currentUser.user.age ? <p>Age: {this.props.currentUser.user.age}</p> : ''}
+            {!!this.props.currentUser.user.members ? <p>Members: {this.props.currentUser.user.members}</p> : ''}
+            {!!this.props.currentUser.user.gender ? <p>Gender: {this.props.currentUser.user.gender}</p> : ''}
+            {!!this.props.currentUser.user.bio ? <p>Bio: {this.props.currentUser.user.bio}</p> : ''}
+
+            <span>
+              {this.state.profilePhotoButton ? <button className="edit-button" onClick={this.renderProfilePhotoForm}>Edit Profile Picture</button> : <form onSubmit={this.submitProfilePhoto}>
+                  <input className="edit-button" type="file" onChange={this.handlePhotoFile}/>
+                  <input className="edit-button" type="submit" value="Upload Photo"/>
+                </form>}
+            </span>
+            <span>
+              {this.state.editForm ? <form onSubmit={(e) => this.submitProfileInfo(e, this.props.currentUser.user.id)}>
+                <label>Location: </label>
+                <input type='text' name="location" onChange={this.editProfile} value={this.state.location} />
+                <br/>
+                {this.props.currentUser.user.is_band ? <label>Genre: </label> : <label>Age</label>}
+                {this.props.currentUser.user.is_band ? <input type='text' name="genre" onChange={this.editProfile} value={this.state.genre} /> : <input type='text' name="age" onChange={this.editProfile} value={this.state.age} />}
+                <br/>
+                {this.props.currentUser.user.is_band ? <label>Members: </label> : <label>Gender</label>}
+                {this.props.currentUser.user.is_band ? <input type='text' name="members" onChange={this.editProfile} value={this.state.members} /> : <input type='text' name="gender" onChange={this.editProfile} value={this.state.gender} />}
+                <br/>
+                <label>Bio: </label>
+                <input type='text' name="bio" onChange={this.editProfile} value={this.state.bio} />
+                <br/>
+                <input className="edit-button" type='submit' value="Update Profile" />
+                </form> : <button className="edit-button" onClick={this.showEditForm}>Edit Profile</button>}
+            </span>
+
+
+
 
             {this.props.currentUser.user.is_band ? <div className="video">
               <button onClick={this.editProfileVideo}>Edit Profile Video</button>
@@ -238,17 +245,22 @@ class CurrentUserProfile extends React.Component {
             {!!this.state.profileVideoButton ? '' : <form onSubmit={this.submitVideo}><label>Paste YouTube Video URL here:</label><input name="videoUrl" type="text" onChange={this.videoHandler} value={this.state.videoUrl}/><input type="submit" value="Submit"/></form>}
 
             {this.props.currentUser.user.is_band && !!this.props.currentUser.user.valid_music_link ? <div><iframe width="696" height="522" src={this.props.currentUser.user.valid_music_link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div> : ''}
-
-            <div className='musings'>
-
-          <h2 className="headings">Musings</h2>
-          <button onClick={this.renderMusingForm}>Post new musing</button>
-          {this.state.musingForm ? <MusingForm submitHandler={this.submitHandler}/> : ""}
-          <div>{allMusings}</div>
-            </div>
           </div> : ''}
-      </div>
+
+        </div>
+
+        : ''}
+
+          <div className='musings'>
+            <h2 className="headings">Musings</h2>
+            <button onClick={this.renderMusingForm}>Post new musing</button>
+            {this.state.musingForm ? <MusingForm submitHandler={this.submitHandler}/> : ""}
+            <div>{allMusings}</div>
+          </div>
+
+
+
+      </React.Fragment>
     )
   }
 }
