@@ -1,6 +1,7 @@
 import React from 'react'
 import '../App.css';
 import {connect} from 'react-redux'
+import fan from '../images/icons8-fan-24.png'
 
 class Musing extends React.Component {
   state = {
@@ -42,24 +43,15 @@ class Musing extends React.Component {
   }
 
   render(){
-    let button;
-    if (!!this.props.currentUser.user){
-      if (this.props.musing.user_id === this.props.currentUser.user.id){
-        button = <button className="delete" onClick={() => this.props.deleteHandler(this.props.musing.id)}>Delete</button>
-      }
-    }
-
 
     return (
       <div className='musing'>
         <p>{this.props.musing.body}</p>
         <div className="likes">
-          <h5><b>Fanned: {this.props.musing.likes}</b></h5>
-
-          {this.state.fanButtonClicked || this.props.musing.user_id === this.props.currentUser.user.id ? "" : <button className="fan-button" onClick={() => this.fanButton(this.props.musing)}>Fan</button>}
-
+          <h5 className="fan-number"><b>Fanned: {this.props.musing.likes}</b></h5>
+          {this.state.fanButtonClicked || this.props.musing.user_id === this.props.currentUser.user.id ? <button className="delete" onClick={() => this.props.deleteHandler(this.props.musing.id)}>Delete</button> : <button className="fan-button" onClick={() => this.fanButton(this.props.musing)}><img src={fan}/></button>}
         </div>
-        {button}
+
       </div>
     )
   }

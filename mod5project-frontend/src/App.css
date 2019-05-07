@@ -48,16 +48,8 @@
 }
 
 .likes {
-  border-style: none;
-  margin: 2px;
-  border-radius: 20px;
-  margin-left: 30%;
-  margin-right: 30%;
-  background-color: #FF6666;
-  object-fit: scale-down;
-  width: 100px;
-  height: 20px;
-  box-shadow: 1px 2px #CCCCCC;
+
+  display: flex;
 }
 
 .musings {
@@ -142,9 +134,35 @@ nav {
 }
 
 .fan-button {
-  background-color: #111111;
-  color: #EEEEEE;
-  border-radius: 5px;
+  background-color: #DD222200;
+  border-style: none;
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+
+}
+
+.fan-button:hover {
+  background-color: #DD2222;
+  border-radius: 20px;
+  width: 36px;
+  height: 36px;
+  box-shadow: 1px 1px #AA0000;
+}
+
+.fan-number {
+  border-style: none;
+  margin: 2px;
+  padding: 1px;
+  text-align: center;
+  border-radius: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #FF6666;
+  object-fit: scale-down;
+  width: 100px;
+  height: 20px;
+  box-shadow: 1px 2px #CCCCCC;
 }
 
 .flex-container {
@@ -153,6 +171,7 @@ nav {
 
 .read-button, .close-button, .write-article, .edit-button, .delete {
   font-family: 'Metal Mania', cursive;
+  border-radius: 5px;
 }
 
 .read-button:hover, .close-button:hover, .write-article:hover, .edit-button:hover, .delete:hover {
