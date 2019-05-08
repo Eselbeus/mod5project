@@ -89,7 +89,7 @@ class App extends React.Component {
         </React.Fragment> :
         ''}
         <div className="flex-container">
-          {!this.state.signup && token ?
+          {token ?
             <React.Fragment>
             <CurrentUserProfile logUser={this.logUser}/>
             <ArticleContainer />
