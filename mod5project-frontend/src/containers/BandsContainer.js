@@ -41,7 +41,7 @@ class BandsContainer extends React.Component {
 
     return (
       <div className='bandcontainer'>
-        <div>{this.state.displayBand ? bandComponents : <Band band={this.state.singleBand} displayJustOneBand={this.displayJustOneBand} displayBand={this.state.displayBand} />}</div>
+        <div className="band-grid">{this.state.displayBand ? bandComponents : <Band band={this.state.singleBand} displayJustOneBand={this.displayJustOneBand} displayBand={this.state.displayBand} />}</div>
         <ArticleContainer />
       </div>
     )

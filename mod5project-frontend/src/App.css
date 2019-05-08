@@ -209,3 +209,11 @@ iframe {
   border-style: solid;
   border-color: #FFFFFF;
 }
+
+.band-grid, .fan-grid, .follower-grid {
+  display: grid;
+  grid-template-columns: 200px 200px 200px 200px;
+  grid-auto-rows: 200px;
+  grid-column-gap: 10px;
+  margin-right: 100px;
+}

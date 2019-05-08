@@ -79,7 +79,7 @@ class ProfileContainer extends React.Component {
     return (
       <React.Fragment >
         <div className='bandcontainer'>
-          <div>{this.state.displayUser ? usersConnected : <User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>}</div>
+          <div className="fan-grid">{this.state.displayUser ? usersConnected : <User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>}</div>
           <ArticleContainer />
         </div>
       </React.Fragment >
