@@ -50,7 +50,7 @@ class BandFollowers extends React.Component {
       fetch(`http://localhost:3000/api/v1/users/${this.props.selectedBand.id}/matches`)
       .then(res => res.json())
       .then(res => {
-        this.setState({matches: res}, () => console.log(res))
+        this.setState({matches: res}, () => console.log(res, 'bandfollowers'))
 
       })
       this.setState({loop: 2})
@@ -60,7 +60,7 @@ class BandFollowers extends React.Component {
   render(){
     let usersConnected
 
-    if (!!this.props.selectedBand && this.state.matches.length > 0){
+    if (!!this.props.selectedBand && this.state.matches.length > 0 && !!this.props.allUsers[0]) {
       let usersConnected2 = this.state.matches.filter(user => {
         return user.user_id === this.props.selectedBand.id
       })
@@ -77,14 +77,26 @@ class BandFollowers extends React.Component {
       usersConnected = mappedToComponents
     }
 
-    return (
-      <React.Fragment>
-        <div className='bandcontainer'>
-          <div className="follower-grid">{this.state.displayUser ? usersConnected : <User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>}</div>
-          <ArticleContainer />
-        </div>
-      </React.Fragment>
-    )
+    if (this.state.displayUser){
+      return (
+        <React.Fragment>
+          <div className='bandcontainer'>
+            <div className="follower-grid">{usersConnected}</div>
+            <ArticleContainer />
+          </div>
+        </React.Fragment>
+      )
+    }
+    else {
+      return (
+        <React.Fragment>
+          <div className='bandcontainerHidden'>
+            <div className="follower-grid"><User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/></div>
+            <ArticleContainer />
+          </div>
+        </React.Fragment>
+      )
+    }
   }
 
 }

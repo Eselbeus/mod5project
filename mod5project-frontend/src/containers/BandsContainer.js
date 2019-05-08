@@ -1,5 +1,6 @@
 import React from 'react'
 import {getBands} from '../redux/actions.js'
+import {loadUser} from '../redux/actions.js'
 import {connect} from 'react-redux'
 import Band from '../components/Band.js'
 import ArticleContainer from './ArticleContainer'
@@ -38,18 +39,28 @@ class BandsContainer extends React.Component {
       return <Band band={band} displayJustOneBand={this.displayJustOneBand} displayBand={this.state.displayBand}/>
     }) : console.log()
 
+    if (this.state.displayBand){
 
     return (
       <div className='bandcontainer'>
-        <div className="band-grid">{this.state.displayBand ? bandComponents : <Band band={this.state.singleBand} displayJustOneBand={this.displayJustOneBand} displayBand={this.state.displayBand} />}</div>
+        <div className="band-grid">{bandComponents}</div>
         <ArticleContainer />
       </div>
     )
+    }
+    else {
+      return (
+        <div className='bandcontainerHidden'>
+          <div className="band-grid">{<Band band={this.state.singleBand} displayJustOneBand={this.displayJustOneBand} displayBand={this.state.displayBand} />}</div>
+          <ArticleContainer />
+        </div>
+      )
+    }
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return ({getBands: () => dispatch(getBands())})
+  return ({getBands: () => dispatch(getBands()), loadUser: (user) => dispatch(loadUser(user))})
 }
 
 const mapStateToProps = (state) => {

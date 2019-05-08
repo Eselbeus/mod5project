@@ -43,13 +43,16 @@ class Musing extends React.Component {
   }
 
   render(){
-
+    console.log(this.props, 'the props that beak')
+    if (!this.props.currentUser.user){
+      return <div></div>
+    }
     return (
       <div className='musing'>
         <p>{this.props.musing.body}</p>
         <div className="likes">
-          <h5 className="fan-number"><b>Fanned: {this.props.musing.likes}</b></h5>
-          {this.state.fanButtonClicked || this.props.musing.user_id === this.props.currentUser.user.id ? <button className="delete" onClick={() => this.props.deleteHandler(this.props.musing.id)}>Delete</button> : <button className="fan-button" onClick={() => this.fanButton(this.props.musing)}><img src={fan}/></button>}
+          <h5 className="fan-number">Fanned: {this.props.musing.likes}</h5>
+          {this.state.fanButtonClicked || (this.props.musing.user_id === this.props.currentUser.user.id) ? <button className="delete" onClick={() => this.props.deleteHandler(this.props.musing.id)}>Delete</button> : <button className="fan-button" onClick={() => this.fanButton(this.props.musing)}><img src={fan}/></button>}
         </div>
 
       </div>

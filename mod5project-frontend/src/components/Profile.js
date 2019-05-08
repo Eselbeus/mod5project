@@ -28,19 +28,28 @@ class Profile extends React.Component {
           .then(resp => resp.json())
           .then(res => {
             this.props.loadUser(res)})
-    }
-    fetch(`http://localhost:3000/api/v1/users/${this.props.band.id}/musings`)
-    .then(res => res.json())
-    .then(res => {
-      if (this.state.musings.length !== res.length){
-        this.setState({musings: res})
-      }
-      console.log(this.props, "is this band?!")
-      // this.props.selectBand(this.props.band)
+          .then(fetch(`http://localhost:3000/api/v1/users/${this.props.band.id}/musings`)
+          .then(res => res.json())
+          .then(res => {
+            if (this.state.musings.length !== res.length){
+              this.setState({musings: res})
+            }
+            
 
-    })
+          }))
+    }
+    // fetch(`http://localhost:3000/api/v1/users/${this.props.band.id}/musings`)
+    // .then(res => res.json())
+    // .then(res => {
+    //   if (this.state.musings.length !== res.length){
+    //     this.setState({musings: res})
+    //   }
+    //   console.log(this.props, "is this band?!")
+    //   // this.props.selectBand(this.props.band)
+    //
+    // })
     // this.props.selectBand(this.props.band)
-    console.log("band now?", this.props)
+    // console.log("band now?", this.props)
   }
 
   updateMusings = () => {

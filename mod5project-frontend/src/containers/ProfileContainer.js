@@ -76,14 +76,27 @@ class ProfileContainer extends React.Component {
       usersConnected = mappedToComponents
     }
 
-    return (
-      <React.Fragment >
-        <div className='bandcontainer'>
-          <div className="fan-grid">{this.state.displayUser ? usersConnected : <User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>}</div>
-          <ArticleContainer />
-        </div>
-      </React.Fragment >
-    )
+    if (this.state.displayUser){
+      return (
+        <React.Fragment >
+          <div className='bandcontainer'>
+            <div className="fan-grid">{usersConnected}</div>
+            <ArticleContainer />
+          </div>
+        </React.Fragment >
+      )
+    }
+    else {
+      return (
+        <React.Fragment >
+          <div className='bandcontainerHidden'>
+            <div className="fan-grid"><User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/></div>
+            <ArticleContainer />
+          </div>
+        </React.Fragment >
+      )
+    }
+
   }
 }
 

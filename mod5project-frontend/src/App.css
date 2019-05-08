@@ -88,7 +88,12 @@
 
 .bandcontainer {
   display: flex;
-  background-color: #EE6666;
+  background-color: #DD3333;
+}
+
+.bandcontainerHidden {
+  display: flex;
+
 }
 
 .article:hover {
