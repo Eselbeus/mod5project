@@ -122,12 +122,14 @@ class Profile extends React.Component {
           </span>
           <button onClick={this.followBand}>Follow {this.props.band.name}</button>
           <button onClick={this.followers}>Find fans of {this.props.band.name}</button>
-          <h2>Username: @{this.props.band.username}</h2>
-          <h4>Band/Musician</h4>
-          {this.props.band.location ? <p>Location: {this.props.band.location}</p> : ''}
-          {this.props.band.genre ? <p>Genre: {this.props.band.genre}</p> : ''}
-          {this.props.band.members ? <p>Members: {this.props.band.members}</p> : ''}
-          <p>Bio: {this.props.band.bio}</p>
+          <div className="user-details">
+            <p>Username: @{this.props.band.username}</p>
+            <p>Band/Musician</p>
+            {this.props.band.location ? <p>Location: {this.props.band.location}</p> : ''}
+            {this.props.band.genre ? <p>Genre: {this.props.band.genre}</p> : ''}
+            {this.props.band.members ? <p>Members: {this.props.band.members}</p> : ''}
+            <p>Bio: {this.props.band.bio}</p>
+          </div>
         </div>
       <div>
         {this.props.band.is_band && !!this.props.band.valid_music_link ? <div><iframe width="696" height="522" src={this.props.band.valid_music_link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

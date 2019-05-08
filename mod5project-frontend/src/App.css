@@ -78,7 +78,7 @@
 }
 
 .article-container {
-
+  width: 300px;
 }
 
 .bandcontainer {
@@ -197,4 +197,15 @@ nav {
 iframe {
   height: 392px;
   width: 522px;
+}
+
+.user-details {
+  align: center;
+  font-family: 'Times New Roman';
+  font-size: 1.2em;
+  background-color: #4466FF88;
+  box-shadow: -1px -1px #CCCCCC;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #FFFFFF;
 }

@@ -14,9 +14,9 @@ class Article extends React.Component {
   render(){
     return (
       <div className='article'>
-        {this.state.articleOpen ? <div><h2>{this.props.article.headline} by {this.props.author}</h2>
+        {this.state.articleOpen ? <div><h2>{this.props.article.headline}</h2><h5> by {this.props.author}</h5>
         <p>{this.props.article.body}</p>
-        <button className="close-button" onClick={this.openArticle}>Close</button></div>: <div><h2>{this.props.article.headline} by {this.props.author}</h2><button className="read-button" onClick={this.openArticle}>Read</button></div>}
+        <button className="close-button" onClick={this.openArticle}>Close</button></div>: <div><h2>{this.props.article.headline}</h2><h5> by {this.props.author}</h5><button className="read-button" onClick={this.openArticle}>Read</button></div>}
 
       </div>
     )

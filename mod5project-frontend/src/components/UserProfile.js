@@ -101,35 +101,37 @@ class UserProfile extends React.Component {
       embedUrl = splitUrl.join("embed/")
     }
     return (
-      <div>
+      <React.Fragment>
+        <section className="profile-and-musings">
         <div className="profile-info">{!!this.props.user ? <div>
           <h1 className="headings">{this.props.user.name}</h1>
-          <h2>@{this.props.user.username}</h2>
-          <h4>user/Musician</h4>
+          <span>
+            <img className="profile-pic" src={`http://localhost:3000${this.props.user.imageUrl}`}/>
+          </span>
+          <div className="user-details">
           <button onClick={this.followUser}>Follow {this.props.user.name}</button>
           {this.props.user.is_band ? <button>Find fans of {this.props.user.name}</button> : ''}
+          <p>@{this.props.user.username}</p>
           {this.props.user.location ? <p>Location: {this.props.user.location}</p> : ''}
-          {this.props.user.genre ? <p>Genre: {this.props.user.genre}</p> : ''}
-          {this.props.user.members ? <p>Members: {this.props.user.members}</p> : ''}
+          {this.props.user.age ? <p>Age: {this.props.user.age}</p> : ''}
+          {this.props.user.gender ? <p>Gender: {this.props.user.gender}</p> : ''}
           <p>Bio: {this.props.user.bio}</p>
+          </div>
 
-        <div>
-          <img className="profile-pic" src={`http://localhost:3000${this.props.user.imageUrl}`}/>
-        </div>
 
         {this.props.user.is_band && !!this.props.user.valid_music_link ? <div><iframe width="696" height="522" src={this.props.user.valid_music_link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div> : ''}
 
-
+</div> : ''}
+</div>
 
         <div className="musings">
           <h2 className="headings">Musings</h2>
-
           {musings}
         </div>
-              </div> : ''}
-        </div>
-      </div>
+              
+        </section>
+      </React.Fragment>
     )
   }
 }

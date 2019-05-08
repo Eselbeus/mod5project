@@ -206,6 +206,7 @@ class CurrentUserProfile extends React.Component {
               <img className="profile-pic" src={`http://localhost:3000${this.props.currentUser.user.imageUrl}`}/>
             </span>
 
+            <div className="user-details">
             <p>Username: @{this.props.currentUser.user.username}</p>
 
             {!!this.props.currentUser.user.location ? <p>Location: {this.props.currentUser.user.location}</p> : ''}
@@ -214,6 +215,7 @@ class CurrentUserProfile extends React.Component {
             {!!this.props.currentUser.user.members ? <p>Members: {this.props.currentUser.user.members}</p> : ''}
             {!!this.props.currentUser.user.gender ? <p>Gender: {this.props.currentUser.user.gender}</p> : ''}
             {!!this.props.currentUser.user.bio ? <p>Bio: {this.props.currentUser.user.bio}</p> : ''}
+            </div>
 
             <span>
               {this.state.profilePhotoButton ? <button className="edit-button" onClick={this.renderProfilePhotoForm}>Edit Profile Picture</button> : <form onSubmit={this.submitProfilePhoto}>
