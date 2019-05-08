@@ -7,7 +7,8 @@ import '../App.css';
 
 class UserProfile extends React.Component {
   state = {
-    musings: []
+    musings: [],
+    followButton: true
   }
 
   componentDidMount(){
@@ -79,6 +80,7 @@ class UserProfile extends React.Component {
     console.log(config, "config")
     fetch(`http://localhost:3000/api/v1/matches`, config)
     console.log(this.props, "props")
+    this.setState({followButton: false})
   }
 
   render(){
@@ -109,8 +111,8 @@ class UserProfile extends React.Component {
             <img className="profile-pic" src={`http://localhost:3000${this.props.user.imageUrl}`}/>
           </span>
           <div className="user-details">
-          <button onClick={this.followUser}>Follow {this.props.user.name}</button>
-          {this.props.user.is_band ? <button>Find fans of {this.props.user.name}</button> : ''}
+          {!!this.state.followButton ? <button className="follow" onClick={this.followUser}>Follow {this.props.user.name}</button> : <h5>Now following!</h5>}
+          {this.props.user.is_band ? <button className="find">Find fans of {this.props.user.name}</button> : ''}
           <p>@{this.props.user.username}</p>
           {this.props.user.location ? <p>Location: {this.props.user.location}</p> : ''}
           {this.props.user.age ? <p>Age: {this.props.user.age}</p> : ''}
@@ -119,17 +121,20 @@ class UserProfile extends React.Component {
           </div>
 
 
-        {this.props.user.is_band && !!this.props.user.valid_music_link ? <div><iframe width="696" height="522" src={this.props.user.valid_music_link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div> : ''}
 
+
+        </div> : ''}
+      </div>
+
+      <div>
+{this.props.user.is_band && !!this.props.user.valid_music_link ? <div><iframe width="696" height="522" src={this.props.user.valid_music_link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div> : ''}
-</div>
 
         <div className="musings">
           <h2 className="headings">Musings</h2>
           {musings}
         </div>
-              
+      </div>
         </section>
       </React.Fragment>
     )

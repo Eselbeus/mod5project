@@ -5,6 +5,7 @@ import {getBands} from '../redux/actions'
 import Band from '../components/Band'
 import User from '../components/User'
 import { BrowserRouter as Link, NavLink, Router } from 'react-router-dom'
+import ArticleContainer from './ArticleContainer'
 
 class ProfileContainer extends React.Component {
   state = {
@@ -76,8 +77,12 @@ class ProfileContainer extends React.Component {
     }
 
     return (
-
-      <div>{this.state.displayUser ? usersConnected : <User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>}</div>
+      <React.Fragment >
+        <div className='bandcontainer'>
+          <div>{this.state.displayUser ? usersConnected : <User user={this.state.singleUser} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>}</div>
+          <ArticleContainer />
+        </div>
+      </React.Fragment >
     )
   }
 }

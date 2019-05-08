@@ -182,12 +182,12 @@ nav {
   display: flex;
 }
 
-.read-button, .close-button, .write-article, .edit-button, .delete, .musings-button {
+.read-button, .close-button, .write-article, .edit-button, .delete, .musings-button, .follow, .find {
   font-family: 'Metal Mania', cursive;
   border-radius: 5px;
 }
 
-.read-button:hover, .close-button:hover, .write-article:hover, .edit-button:hover, .delete:hover, .musings-button:hover {
+.read-button:hover, .close-button:hover, .write-article:hover, .edit-button:hover, .delete:hover, .musings-button:hover, .follow:hover, .find:hover {
   background-color: #4466FF;
   color: #EEEEEE;
   font-family: 'Metal Mania', cursive;

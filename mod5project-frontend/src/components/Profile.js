@@ -9,7 +9,8 @@ import {selectBand} from '../redux/actions'
 
 class Profile extends React.Component {
   state = {
-    musings: []
+    musings: [],
+    followButton: true
   }
 
   componentDidMount(){
@@ -85,6 +86,7 @@ class Profile extends React.Component {
     console.log(config, "config")
     fetch(`http://localhost:3000/api/v1/matches`, config)
     console.log(this.props, "props")
+    this.setState({followButton: false})
   }
 
   followers = (e) => {
@@ -120,8 +122,8 @@ class Profile extends React.Component {
           <span>
             <img className="profile-pic" src={`http://localhost:3000${this.props.band.imageUrl}`}/>
           </span>
-          <button onClick={this.followBand}>Follow {this.props.band.name}</button>
-          <button onClick={this.followers}>Find fans of {this.props.band.name}</button>
+          {!!this.state.followButton ? <button className="follow" onClick={this.followBand}>Follow {this.props.band.name}</button> : <h5>Now following!</h5>}
+          <button className="find" onClick={this.followers}>Find fans of {this.props.band.name}</button>
           <div className="user-details">
             <p>Username: @{this.props.band.username}</p>
             <p>Band/Musician</p>
