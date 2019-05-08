@@ -57,7 +57,7 @@ class Signup extends React.Component {
             <option value={true}>Band/Musician</option>
           </select>
           <br />
-          <input type="submit" value="Sign up" />
+          <input className="signup-button" type="submit" value="Sign up" />
         </form>
       </div>
     )

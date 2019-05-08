@@ -12,15 +12,19 @@ class Nav extends React.Component {
     if (this.props.currentUser.user){
       isBand = this.props.currentUser.user.is_band
     }
+    let token = localStorage.getItem('token')
 
     return (
 
       <nav>
         <NavLink className="nav-elem" to='/'>Rockmuser</NavLink>
+        {!!token ?
+        <React.Fragment>
         {isBand === false ?
         <NavLink className="nav-elem" to='/bands'>Bands</NavLink> : ""}
         <NavLink className="nav-elem" to='/fans'>Fans</NavLink>
         <NavLink className="nav-elem" onClick={this.props.logoutUser} to='/'>Logout</NavLink>
+        </React.Fragment> : <NavLink className="nav-elem" to='/'>Login</NavLink>}
       </nav>
 
     )

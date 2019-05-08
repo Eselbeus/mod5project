@@ -81,16 +81,19 @@ class App extends React.Component {
       <div className="App">
         <header link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Font+Name"></header>
-        <h1>{this.props.currentUser.user != undefined ? `` : "Hello Muser!"}</h1>
+        <h1 className="headings">{this.props.currentUser.user != undefined ? `` : "Hello Muser!"}</h1>
         {!token ?
         <React.Fragment>
-          {!this.state.signup ? <button onClick={this.signupButton}>Signup</button> : <Signup />}
-          {!this.state.login ? <button onClick={this.loginButton}>Login for returning users</button> : <Login />}
+          {!this.state.signup ? <button className="signup-button" onClick={this.signupButton}>Signup</button> : <Signup />}
+          {!this.state.login ? <button className="login-button" onClick={this.loginButton}>Login for returning users</button> : <Login />}
         </React.Fragment> :
         ''}
         <div className="flex-container">
-          <CurrentUserProfile logUser={this.logUser}/>
-          <ArticleContainer />
+          {!this.state.signup && token ?
+            <React.Fragment>
+            <CurrentUserProfile logUser={this.logUser}/>
+            <ArticleContainer />
+            </React.Fragment> : ''}
         </div>
       </div>
     );

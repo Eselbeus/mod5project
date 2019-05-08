@@ -34,6 +34,11 @@
 
 .login-form {
   background-color: #EEEEEE;
+  margin-left: 35%;
+  margin-right: 35%;
+  border-radius: 5px;
+  font-family: 'Metal Mania', cursive;
+  padding-bottom: 20px;
 }
 
 .profile-and-musings {
@@ -62,7 +67,7 @@
 }
 
 .articles {
-  background-color: #4466FF88;
+  background-color: #6688FF;
   box-shadow: -1px -1px #CCCCCC;
   border-radius: 5px;
 }
@@ -83,6 +88,7 @@
 
 .bandcontainer {
   display: flex;
+  background-color: #EE6666;
 }
 
 .article:hover {
@@ -107,7 +113,6 @@ nav {
 
 .profile-pic {
   object-fit: scale-down;
-
   width: 400px;
   height: 400px;
 }
@@ -182,7 +187,8 @@ nav {
   display: flex;
 }
 
-.read-button, .close-button, .write-article, .edit-button, .delete, .musings-button, .follow, .find {
+
+.read-button, .close-button, .write-article, .edit-button, .delete, .musings-button, .follow, .find, .signup-button, .login-button {
   font-family: 'Metal Mania', cursive;
   border-radius: 5px;
 }
@@ -203,7 +209,7 @@ iframe {
   align: center;
   font-family: 'Times New Roman';
   font-size: 1.2em;
-  background-color: #4466FF88;
+  background-color: #6688FF;
   box-shadow: -1px -1px #CCCCCC;
   border-radius: 5px;
   border-style: solid;
