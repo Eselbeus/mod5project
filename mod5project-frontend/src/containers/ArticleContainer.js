@@ -46,7 +46,7 @@ class ArticleContainer extends React.Component {
     fetch(`http://localhost:3000/api/v1/users/${userId}/articles`, config)
     .then(res => res.json())
     .then(res => {
-        this.setState({articles: [...this.state.articles, res]}, () => console.log(this.state.articles, "after fetch2articles"))
+        this.setState({articles: [...this.state.articles, res], articleForm: false}, () => console.log(this.state.articles, "after fetch2articles"))
     })
   }
 
@@ -73,19 +73,19 @@ class ArticleContainer extends React.Component {
 
 
         return (
-          <div>
-            <div>
+          <div className="article-container">
               <Article article={article} author={author.name}/>
-            </div>
+
           </div>
         )
       })
     }
     return (
       <div className='articles'>
-      <button className="write-article" onClick={this.renderArticleForm}>Write new Article</button>
+
       {this.state.articleForm ? <ArticleForm submitArtHandler={this.submitArtHandler}/> : ""}
         <h2 className="headings">Daily Articles</h2>
+        <button className="write-article" onClick={this.renderArticleForm}>Write new Article</button>
         {allArticles !== undefined ? allArticles.reverse() : ""}
 
       </div>

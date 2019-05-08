@@ -55,6 +55,7 @@ class CurrentUserProfile extends React.Component {
     }
     console.log(config, "config prior to action")
     this.props.postMusing(this.props.currentUser.user.id, config)
+    this.setState({musingForm: false})
   }
 //moving this post fetch to actions postMusing
 
@@ -76,7 +77,9 @@ class CurrentUserProfile extends React.Component {
     }
     fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.user.id}`, config)
     .then(res => res.json())
-    .then(res => console.log(res, this.props.currentUser.user))
+    .then(res => {
+      this.setState({profilePhotoButton: true})
+    })
   }
 
   renderMusingForm = () => {
@@ -253,7 +256,7 @@ class CurrentUserProfile extends React.Component {
 
           <div className='musings'>
             <h2 className="headings">Musings</h2>
-            <button onClick={this.renderMusingForm}>Post new musing</button>
+            <button className='musings-button' onClick={this.renderMusingForm}>Post new musing</button>
             {this.state.musingForm ? <MusingForm submitHandler={this.submitHandler}/> : ""}
             <div>{allMusings}</div>
           </div>

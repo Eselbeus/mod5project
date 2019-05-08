@@ -52,7 +52,6 @@
 }
 
 .likes {
-
   display: flex;
 }
 
@@ -76,6 +75,14 @@
   box-shadow: 1px 1px #CCCCCC;
   font-family: 'Times New Roman';
   padding: 2px;
+}
+
+.article-container {
+
+}
+
+.bandcontainer {
+  display: flex;
 }
 
 .article:hover {
@@ -175,14 +182,19 @@ nav {
   display: flex;
 }
 
-.read-button, .close-button, .write-article, .edit-button, .delete {
+.read-button, .close-button, .write-article, .edit-button, .delete, .musings-button {
   font-family: 'Metal Mania', cursive;
   border-radius: 5px;
 }
 
-.read-button:hover, .close-button:hover, .write-article:hover, .edit-button:hover, .delete:hover {
+.read-button:hover, .close-button:hover, .write-article:hover, .edit-button:hover, .delete:hover, .musings-button:hover {
   background-color: #4466FF;
   color: #EEEEEE;
   font-family: 'Metal Mania', cursive;
   border-radius: 5px;
+}
+
+iframe {
+  height: 392px;
+  width: 522px;
 }
