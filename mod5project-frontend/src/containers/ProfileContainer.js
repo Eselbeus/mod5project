@@ -73,7 +73,7 @@ class ProfileContainer extends React.Component {
       let mappedToComponents = filteredUsers.map(user => {
         return <User user={user} displayJustOneUser={this.displayJustOneUser} displayUser={this.state.displayUser}/>
       })
-      usersConnected = mappedToComponents
+      usersConnected = mappedToComponents.reverse()
     }
 
     if (this.state.displayUser){

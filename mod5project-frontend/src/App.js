@@ -81,7 +81,7 @@ class App extends React.Component {
       <div className="App">
         <header link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Font+Name"></header>
-        <h1 className="headings">{this.props.currentUser.user != undefined ? `` : "Hello Muser!"}</h1>
+        {this.props.currentUser.user != undefined ? `` : <h1 className="headings">Hello Muser!</h1>}
         {!token ?
         <React.Fragment>
           {!this.state.signup ? <button className="signup-button" onClick={this.signupButton}>Signup</button> : <Signup />}

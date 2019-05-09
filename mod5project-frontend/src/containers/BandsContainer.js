@@ -43,7 +43,7 @@ class BandsContainer extends React.Component {
 
     return (
       <div className='bandcontainer'>
-        <div className="band-grid">{bandComponents}</div>
+        <div className="band-grid">{bandComponents.reverse()}</div>
         <ArticleContainer />
       </div>
     )

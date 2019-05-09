@@ -32,13 +32,22 @@
   }
 }
 
+@keyframes redblue {
+  from {background-color: #DD333388;}
+  to {background-color: #6688FF;}
+}
+
 .login-form {
-  background-color: #EEEEEE;
+  /* background-color: #EEEEEE; */
   margin-left: 35%;
   margin-right: 35%;
   border-radius: 5px;
   font-family: 'Metal Mania', cursive;
   padding-bottom: 20px;
+  animation-name: redblue;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
 }
 
 .profile-and-musings {
@@ -95,7 +104,10 @@
 
 .bandcontainerHidden {
   display: flex;
+}
 
+.bandname {
+  padding: 5px;
 }
 
 .article:hover {
@@ -126,7 +138,7 @@ nav {
 
 .profile-thumbnail {
   object-fit: scale-down;
-
+  padding: 5px;
   width: 64px;
   height: 64px;
 }
@@ -218,11 +230,15 @@ iframe {
   text-align: center;
   font-family: 'Times New Roman';
   font-size: 1.2em;
-  background-color: #6688FF;
+  /* background-color: #6688FF; */
   box-shadow: -1px -1px #CCCCCC;
   border-radius: 5px;
   border-style: solid;
   border-color: #FFFFFF;
+  animation-name: redblue;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
 }
 
 .band-grid, .fan-grid, .follower-grid {
@@ -231,4 +247,8 @@ iframe {
   grid-auto-rows: 200px;
   grid-column-gap: 10px;
   margin-right: 100px;
+}
+
+.searchview {
+  padding: 5px;
 }
