@@ -24,7 +24,7 @@ class Nav extends React.Component {
         <NavLink className="nav-elem" to='/bands'>Bands</NavLink> : ""}
         <NavLink className="nav-elem" to='/fans'>Fans</NavLink>
         <NavLink className="nav-elem" onClick={this.props.logoutUser} to='/'>Logout</NavLink>
-        </React.Fragment> : <NavLink className="nav-elem" to='/'>Login</NavLink>}
+        </React.Fragment> : ''}
       </nav>
 
     )
