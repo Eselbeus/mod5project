@@ -209,12 +209,12 @@ class CurrentUserProfile extends React.Component {
             <div className="user-details">
             <h3>Username: @{this.props.currentUser.user.username}</h3>
 
-            {!!this.props.currentUser.user.location ? <p>Location: {this.props.currentUser.user.location}</p> : ''}
-            {!!this.props.currentUser.user.genre ? <p>Genre: {this.props.currentUser.user.genre}</p> : ''}
-            {!!this.props.currentUser.user.age ? <p>Age: {this.props.currentUser.user.age}</p> : ''}
-            {!!this.props.currentUser.user.members ? <p>Members: {this.props.currentUser.user.members}</p> : ''}
-            {!!this.props.currentUser.user.gender ? <p>Gender: {this.props.currentUser.user.gender}</p> : ''}
-            {!!this.props.currentUser.user.bio ? <p>Bio: {this.props.currentUser.user.bio}</p> : ''}
+            {!!this.props.currentUser.user.location ? <p><b>Location: </b>{this.props.currentUser.user.location}</p> : ''}
+            {!!this.props.currentUser.user.genre ? <p><b>Genre: </b>{this.props.currentUser.user.genre}</p> : ''}
+            {!!this.props.currentUser.user.age ? <p><b>Age: </b>{this.props.currentUser.user.age}</p> : ''}
+            {!!this.props.currentUser.user.members ? <p><b>Members: </b>{this.props.currentUser.user.members}</p> : ''}
+            {!!this.props.currentUser.user.gender ? <p><b>Gender: </b>{this.props.currentUser.user.gender}</p> : ''}
+            {!!this.props.currentUser.user.bio ? <p><b>Bio: </b>{this.props.currentUser.user.bio}</p> : ''}
             </div>
 
             <span>

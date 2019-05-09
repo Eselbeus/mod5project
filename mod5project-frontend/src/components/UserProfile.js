@@ -114,10 +114,10 @@ class UserProfile extends React.Component {
           {!!this.state.followButton ? <button className="follow" onClick={this.followUser}>Follow {this.props.user.name}</button> : <h5>Now following!</h5>}
           {this.props.user.is_band ? <button className="find">Find fans of {this.props.user.name}</button> : ''}
           <h3>@{this.props.user.username}</h3>
-          {this.props.user.location ? <p>Location: {this.props.user.location}</p> : ''}
-          {this.props.user.age ? <p>Age: {this.props.user.age}</p> : ''}
-          {this.props.user.gender ? <p>Gender: {this.props.user.gender}</p> : ''}
-          <p>Bio: {this.props.user.bio}</p>
+          {this.props.user.location ? <p><b>Location: </b>{this.props.user.location}</p> : ''}
+          {this.props.user.age ? <p><b>Age: </b>{this.props.user.age}</p> : ''}
+          {this.props.user.gender ? <p><b>Gender: </b>{this.props.user.gender}</p> : ''}
+          <p><b>Bio: </b>{this.props.user.bio}</p>
           </div>
 
 

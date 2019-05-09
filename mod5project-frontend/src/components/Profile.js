@@ -135,11 +135,11 @@ class Profile extends React.Component {
           <button className="find" onClick={this.followers}>Find fans of {this.props.band.name}</button>
           <div className="user-details">
             <h3>Username: @{this.props.band.username}</h3>
-            <p>Band/Musician</p>
-            {this.props.band.location ? <p>Location: {this.props.band.location}</p> : ''}
-            {this.props.band.genre ? <p>Genre: {this.props.band.genre}</p> : ''}
-            {this.props.band.members ? <p>Members: {this.props.band.members}</p> : ''}
-            <p>Bio: {this.props.band.bio}</p>
+            <p><b>Band/Musician</b></p>
+            {this.props.band.location ? <p><b>Location: </b>{this.props.band.location}</p> : ''}
+            {this.props.band.genre ? <p><b>Genre: </b>{this.props.band.genre}</p> : ''}
+            {this.props.band.members ? <p><b>Members: </b>{this.props.band.members}</p> : ''}
+            <p><b>Bio: </b>{this.props.band.bio}</p>
           </div>
         </div>
       <div>
