@@ -207,7 +207,7 @@ class CurrentUserProfile extends React.Component {
             </span>
 
             <div className="user-details">
-            <p>Username: @{this.props.currentUser.user.username}</p>
+            <h3>Username: @{this.props.currentUser.user.username}</h3>
 
             {!!this.props.currentUser.user.location ? <p>Location: {this.props.currentUser.user.location}</p> : ''}
             {!!this.props.currentUser.user.genre ? <p>Genre: {this.props.currentUser.user.genre}</p> : ''}
@@ -245,16 +245,17 @@ class CurrentUserProfile extends React.Component {
 
 
             {this.props.currentUser.user.is_band ? <div className="video">
-              <button onClick={this.editProfileVideo}>Edit Profile Video</button>
+              <button className="edit-video" onClick={this.editProfileVideo}>Edit Profile Video</button>
             </div> : ''}
             {!!this.state.profileVideoButton ? '' : <form onSubmit={this.submitVideo}><label>Paste YouTube Video URL here:</label><input name="videoUrl" type="text" onChange={this.videoHandler} value={this.state.videoUrl}/><input type="submit" value="Submit"/></form>}
 
-            {this.props.currentUser.user.is_band && !!this.props.currentUser.user.valid_music_link ? <div><iframe width="696" height="522" src={this.props.currentUser.user.valid_music_link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div> : ''}
 
         </div>
 
         : ''}
+        <div>
+          <span>{!!this.props.currentUser.user ?<div>{this.props.currentUser.user.is_band && !!this.props.currentUser.user.valid_music_link ? <div><iframe width="696" height="522" src={this.props.currentUser.user.valid_music_link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div> : ''}</div>:''}</span>
 
           <div className='musings'>
             <h2 className="headings">Musings</h2>
@@ -263,7 +264,7 @@ class CurrentUserProfile extends React.Component {
             <div>{allMusings}</div>
           </div>
 
-
+        </div>
 
       </React.Fragment>
     )

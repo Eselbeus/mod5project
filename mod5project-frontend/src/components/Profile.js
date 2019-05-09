@@ -34,7 +34,7 @@ class Profile extends React.Component {
             if (this.state.musings.length !== res.length){
               this.setState({musings: res})
             }
-            
+
 
           }))
     }
@@ -134,7 +134,7 @@ class Profile extends React.Component {
           {!!this.state.followButton ? <button className="follow" onClick={this.followBand}>Follow {this.props.band.name}</button> : <h5>Now following!</h5>}
           <button className="find" onClick={this.followers}>Find fans of {this.props.band.name}</button>
           <div className="user-details">
-            <p>Username: @{this.props.band.username}</p>
+            <h3>Username: @{this.props.band.username}</h3>
             <p>Band/Musician</p>
             {this.props.band.location ? <p>Location: {this.props.band.location}</p> : ''}
             {this.props.band.genre ? <p>Genre: {this.props.band.genre}</p> : ''}

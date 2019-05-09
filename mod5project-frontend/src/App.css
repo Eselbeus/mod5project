@@ -64,12 +64,14 @@
   background-color: #DD333388;
   margin: 20px;
   border-radius: 5px;
+  width: 100%;
 }
 
 .articles {
   background-color: #6688FF;
   box-shadow: -1px -1px #CCCCCC;
   border-radius: 5px;
+  text-align: center;
 }
 
 .article {
@@ -195,7 +197,7 @@ nav {
 }
 
 
-.read-button, .close-button, .write-article, .edit-button, .delete, .musings-button, .follow, .find, .signup-button, .login-button {
+.read-button, .close-button, .write-article, .edit-button, .delete, .musings-button, .follow, .find, .signup-button, .login-button, .edit-video {
   font-family: 'Metal Mania', cursive;
   border-radius: 5px;
 }
@@ -213,7 +215,7 @@ iframe {
 }
 
 .user-details {
-  align: center;
+  text-align: center;
   font-family: 'Times New Roman';
   font-size: 1.2em;
   background-color: #6688FF;
